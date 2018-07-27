@@ -8,8 +8,23 @@ from scipy.stats import chisquare
 # FN
 
 # Observed distribution
-M = np.array([[63, 52, 43],
-              [69, 48, 40]])
+#M = np.array([[63, 52, 43],
+#              [69, 48, 40]])
+#M = np.array([[62, 296],
+#              [43, 168]])
+#M = np.array([[7, 33],    # 6 hours, FN
+#              [4, 8],     #          FP
+#              [19, 87],   #          TN
+#              [16, 62]])  #          TP
+#M = np.array([[6, 33],    # 12 hours, FN
+#              [6, 18],    #           FP
+#              [17, 77],   #           TN
+#              [17, 62]])  #           TP
+M = np.array([[11, 58],    # 2 hours, FN
+              [4, 26],    #          FP
+              [19, 69],   #          TN
+              [12, 37]])  #          TP
+
 
 # Total number of observations
 Total = np.zeros((M.shape[0]+1, M.shape[1]+1), dtype=int)
@@ -35,7 +50,8 @@ print("Column sums:")
 print([M[:,i].sum() for i in range(M.shape[1])])
 
 XSq = ((M - Mexp)**2) / Mexp
-print("Chi Squared:", XSq)
+print("Chi Squared:")
+print(XSq)
 print("Chi Squared Distance:", XSq.sum())
 DF = (M.shape[0]-1) * (M.shape[1]-1)
 print("Degrees of freedom:", DF)
