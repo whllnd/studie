@@ -145,6 +145,7 @@ def false_alarms(calvings, threshold):
                 break
         assert calving_time is not None, "Calving time is none?"
         thresh = calving_time - datetime.timedelta(hours=threshold)
+        start = calving_time - datetime.timedelta(hours=48)
 
         for i,warnings in enumerate([m.ha1_warnings, m.ha2_warnings]):
 
@@ -309,7 +310,8 @@ def process(batch, measurements, study):
 # ==============================================================================
 
 # Open data file
-with open("./Moocall_Daten_korrigiert-08-Feb-2018.csv") as fh:
+#with open("./Moocall_Daten_korrigiert-08-Feb-2018.csv") as fh:
+with open("./ROHDATEN-sortiert-26-Jul-2018.csv") as fh:
     study = list(csv.reader(fh, delimiter=","))
 
 # Index to excel column
@@ -721,7 +723,7 @@ print(evaluate(h, 12))
 print(evaluate(h, 24))
 
 # Some additional stuff from nearly end of july
-print("14.) How many false alarms")
+print("\n14.) How many false alarms")
 calvings = [measurements[id] for id in measurements if measurements[id].did_calve]
 for thresh in [2,3,6]:
     fp, fn = false_alarms(calvings, thresh) # [ha1_cows, ha1_heifers, ha2_cows, ha2_heifers]
@@ -735,9 +737,11 @@ for thresh in [2,3,6]:
     print("FN HA1:", fnp[0], "per cow vs", fnp[1], "per heifer (absolut:", fn[0], "vs", fn[1],")")
     print("FN HA2:", fnp[2], "per cow vs", fnp[3], "per heifer (absolut:", fn[2], "vs", fn[3],")")
 
+
 # 15.) How often HA1 after first SonT -> Abwehr?
-print("15.) After SonT, how often occurs an HA1 message within first 2h?")
-dt = []
+print("\n15.) After SonT, how often occurs an HA1 message within first 2h?")
+dt_cows = []
+dt_heifers = []
 for m in [measurements[id] for id in measurements if measurements[id].did_calve]:
     if len(m.ha1_warnings) == 0:
         continue
@@ -745,15 +749,60 @@ for m in [measurements[id] for id in measurements if measurements[id].did_calve]
     sorted_ha1 = sorted(m.ha1_warnings)
     d = (sorted_ha1[0] - sorted_events[0].start).total_seconds()
     if d < 0:
-        #print("...")
         print("id:", m.id, "1st event:", sorted_events[0].start, "1st ha1:", sorted_ha1[0])
-        #print("1st event:", sorted_events[0].start)
-        #print("1st ha1:  ", sorted_ha1[0])
-        #print("events:", sorted_events)
-        #print("ha1:   ", sorted_ha1)
+        raise Exception("15.)")
         continue
-    dt.append(d)
 
-print("Number of times HA1 occured within first 2h after SonT:", len([d for d in dt if d <= 2 * 3600]))
-print("Average time between SonT and first HA1:", np.array(dt).mean() / 3600, "hours")
+    for e in sorted_events:
+        min_dt = np.inf
+        for w in sorted_ha1:
+            delta = (w - e.start).total_seconds()
+            if delta > 0 and delta <= 2*3600 and delta < min_dt:
+                min_dt = delta
 
+        if min_dt == np.inf:
+            continue
+
+        if m.is_heifer:
+            dt_heifers.append(min_dt)
+        else:
+            dt_cows.append(min_dt)
+
+dt = dt_cows + dt_heifers
+within_cows = len([d for d in dt_cows if d <= 2 * 3600])
+within_heifers = len([d for d in dt_heifers if d <= 2 * 3600])
+print("Cows + heifers:")
+print("   Number of times HA1 occured within first 2h after SonT:", len([d for d in dt if d <= 2 * 3600]))
+print("   Average time in hours between HA1 and SonT if dt <= 2h:", np.array([d for d in dt if d <= 2 * 3600]).mean() / 3600)
+print("Cows:")
+print("   Number of times HA1 occured within first 2h after SonT:", within_cows, "abs,", within_cows / 95, "per cow")
+print("   Average time in hours between HA1 and SonT if dt <= 2h:", np.array([d for d in dt_cows if d <= 2 * 3600]).mean() / 3600)
+print("Heifers:")
+print("   Number of times HA1 occured within first 2h after SonT:", within_heifers, "abs,", within_heifers / 23, "per heifer")
+print("   Average time in hours between HA1 and SonT if dt <= 2h:", np.array([d for d in dt_heifers if d <= 2 * 3600]).mean() / 3600)
+
+
+
+
+
+
+
+
+
+# At the end, all the time
+#with open("./Geburtsverlauf-23-Jul-2018.csv") as fh:
+#    geburtsverlauf = list(csv.reader(fh, delimiter=","))
+#
+#for id in measurements:
+#    if not measurements[id].did_calve:
+#        continue
+#    for e in measurements[id].events:
+#        if e.score == 1:
+#            for g in geburtsverlauf:
+#                if str(id) == g[0]:
+#                    g[2] = str(e.real_calving_time)
+#
+#with open("./Geburtsverlauf-23-Jul-2018_mit_Abkalbezeit.csv", "w") as fh:
+#    writer = csv.writer(fh, delimiter=",")
+#    for g in geburtsverlauf:
+#        writer.writerow(g)
