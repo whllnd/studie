@@ -799,7 +799,27 @@ print("   Average time in hours between HA1 and SonT if dt <= 2h:", np.array([d 
 
 
 
+# CSV with all HA1 and HA2 stuff
+with open("HA1_HA2_warnings.csv", "w") as fh:
+    f = csv.writer(fh, delimiter=",")
+    f.writerow(["Typ (HA1 / HA2)", "Kuh ID", "Status (Kuh / Faerse)", "Zeitstempel", "Umstallzeit", "Geburtszeit"])
+    for id in measurements:
+        if not measurements[id].did_calve:
+            continue
 
+        m = measurements[id]
+        status = "Kuh" if not m.is_heifer else "Faerse"
+        tumstall, tgeburt = None, None
+        for e in m.events:
+            if e.score == 1:
+                tumstall = e.end
+                tgeburt = e.real_calving_time
+
+        for w in m.ha1_warnings:
+            f.writerow(["HA1", str(id), status, str(w), str(tumstall), str(tgeburt)])
+
+        for w in m.ha2_warnings:
+            f.writerow(["HA2", str(id), status, str(w), str(tumstall), str(tgeburt)])
 
 
 
