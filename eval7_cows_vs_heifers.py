@@ -90,8 +90,10 @@ HA1, HA2 = 0, 1
 TP, FN, FP, TN = 0, 1, 2, 3
 def evaluate(measurement_list, threshold):
 
-    results = [[0]*4, [0]*4] # [ha1, ha2]
-    totals  = [[0]*4, [0]*4] # Only relevant for tp and fp, though
+    results_cows    = [[0]*4, [0]*4] # [ha1, ha2]
+    results_heifers = [[0]*4, [0]*4] # [ha1, ha2]
+    totals_cows     = [[0]*4, [0]*4] # Only relevant for tp and fp, though
+    totals_heifers  = [[0]*4, [0]*4] # Only relevant for tp and fp, though
 
     for m in measurement_list:
 
@@ -104,7 +106,7 @@ def evaluate(measurement_list, threshold):
         assert calving_time is not None, "Calving time is none?"
         #calving_time = [deepcopy(e.end) for e in m.events if e.score == 1][0]
         thresh = calving_time - datetime.timedelta(hours=threshold)
-        start = calving_time - datetime.timedelta(hours=2*threshold)
+        start = calving_time - datetime.timedelta(hours=48)
 
         for i,warnings in enumerate([m.ha1_warnings, m.ha2_warnings]):
 
@@ -115,16 +117,26 @@ def evaluate(measurement_list, threshold):
             tn = 0 if fp > 0 else 1
 
             # Update cow results
-            results[i][TP] += min(1, tp)
-            results[i][FN] += fn
-            results[i][FP] += min(1, fp)
-            results[i][TN] += tn
+            if not m.is_heifer:
+                results_cows[i][TP] += min(1, tp)
+                results_cows[i][FN] += fn
+                results_cows[i][FP] += min(1, fp)
+                results_cows[i][TN] += tn
 
-            # Keep track of total occurences
-            totals[i][TP] += tp
-            totals[i][FP] += fp
+                # Keep track of total occurences
+                totals_cows[i][TP] += tp
+                totals_cows[i][FP] += fp
+            else:
+                results_heifers[i][TP] += min(1, tp)
+                results_heifers[i][FN] += fn
+                results_heifers[i][FP] += min(1, fp)
+                results_heifers[i][TN] += tn
 
-    return results, totals
+                # Keep track of total occurences
+                totals_heifers[i][TP] += tp
+                totals_heifers[i][FP] += fp
+
+    return results_cows, totals_cows, results_heifers, totals_heifers
 
 # ==============================================================================
 
@@ -598,12 +610,16 @@ print("HA1:", ha1[0], "(cows)", ha1[1], "(heifers)")
 print("HA2:", ha2[0], "(cows)", ha2[1], "(heifers)")
 
 # 5./6./7.) True positives, false positives, false negatives (TODO: fn = calvings - tp??)
-eval_results = {1 : {}, 2 : {}} # {studie1, studie2}
+eval_results_cows = {1 : {}, 2 : {}} # {studie1, studie2}
+eval_results_heifers = {1 : {}, 2 : {}} # {studie1, studie2}
 for study in range(1,3):
     ml = [measurements[id] for id in measurements if measurements[id].did_calve and measurements[id].study == study]
-    for threshold in range(2,37): # --|start --- threshold --- event|--
-        eval_results[study][threshold] = evaluate(ml, threshold)
-csv_export(eval_results, "evaluation_results.csv")
+    for threshold in [2,3,6]: # --|start --- threshold --- event|--
+        results_cows, totals_cows, results_heifers, totals_heifers = evaluate(ml, threshold)
+        eval_results_cows[study][threshold] = [results_cows, totals_cows]
+        eval_results_heifers[study][threshold] = [results_heifers, totals_heifers]
+csv_export(eval_results_cows, "evaluation_results_cows.csv")
+csv_export(eval_results_heifers, "evaluation_results_heifers.csv")
 
 #b72_ha1 = [0,0]
 #b72_ha2 = [0,0]
