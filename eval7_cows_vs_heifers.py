@@ -40,6 +40,7 @@ class event:
         self.end = None
         self.score = None
         self.real_calving_time = None
+        self.moocall_score = None
 
     def __lt__(self, other):
         return self.start < other.start
@@ -206,12 +207,12 @@ def csv_export(results_dict, csv_fname):
         writer.writerow(["HA1"])
         writer.writerow(["Threshold [h]"] + [str(t) for t in results_dict[1].keys()])
         for i in range(6):
-            writer.writerow([key_map[i]] + [str(mat[2,0,i,thresh]) for thresh in range(mat.shape[3])])
+            writer.writerow([key_map[i]] + [str(mat[2,0,i,thresh]).replace(".",",") for thresh in range(mat.shape[3])])
         writer.writerow([""])
         writer.writerow(["HA2"])
         writer.writerow(["Threshold [h]"] + [str(t) for t in results_dict[1].keys()])
         for i in range(6):
-            writer.writerow([key_map[i]] + [str(mat[2,1,i,thresh]) for thresh in range(mat.shape[3])])
+            writer.writerow([key_map[i]] + [str(mat[2,1,i,thresh]).replace(".",",") for thresh in range(mat.shape[3])])
 
         writer.writerow([""])
         writer.writerow([""])
@@ -219,12 +220,12 @@ def csv_export(results_dict, csv_fname):
         writer.writerow(["HA1"])
         writer.writerow(["Threshold [h]"] + [str(t) for t in results_dict[1].keys()])
         for i in range(6):
-            writer.writerow([key_map[i]] + [str(mat[0,0,i,thresh]) for thresh in range(mat.shape[3])])
+            writer.writerow([key_map[i]] + [str(mat[0,0,i,thresh]).replace(".",",") for thresh in range(mat.shape[3])])
         writer.writerow([""])
         writer.writerow(["HA2"])
         writer.writerow(["Threshold [h]"] + [str(t) for t in results_dict[1].keys()])
         for i in range(6):
-            writer.writerow([key_map[i]] + [str(mat[0,1,i,thresh]) for thresh in range(mat.shape[3])])
+            writer.writerow([key_map[i]] + [str(mat[0,1,i,thresh]).replace(".",",") for thresh in range(mat.shape[3])])
 
         writer.writerow([""])
         writer.writerow([""])
@@ -232,11 +233,11 @@ def csv_export(results_dict, csv_fname):
         writer.writerow(["HA1"])
         writer.writerow(["Threshold [h]"] + [str(t) for t in results_dict[1].keys()])
         for i in range(6):
-            writer.writerow([key_map[i]] + [str(mat[1,0,i,thresh]) for thresh in range(mat.shape[3])])
+            writer.writerow([key_map[i]] + [str(mat[1,0,i,thresh]).replace(".",",") for thresh in range(mat.shape[3])])
         writer.writerow(["HA2"])
         writer.writerow(["Threshold [h]"] + [str(t) for t in results_dict[1].keys()])
         for i in range(6):
-            writer.writerow([key_map[i]] + [str(mat[1,1,i,thresh]) for thresh in range(mat.shape[3])])
+            writer.writerow([key_map[i]] + [str(mat[1,1,i,thresh]).replace(".",",") for thresh in range(mat.shape[3])])
 
 # ==============================================================================
 
@@ -303,6 +304,11 @@ def process(batch, measurements, study):
         e.score = score
         if score == 1 and len(line[I]) > 0:
             e.real_calving_time = parse_time(line[I])
+        if len(line[H]) > 0:
+            try:
+                e.moocall_score = int(line[H])
+            except ValueError:
+                pass
         if id in measurements:
             measurements[id].events.append(deepcopy(e))
             measurements[id].study = study
@@ -698,6 +704,10 @@ for id in measurements:
             #    print("Negative time difference for id", id, dt)
             #    continue
             #print("ha1:", dt, id)
+            if id == 3588:
+                print("calving time:", calving_time)
+                print("ha1:         ", w)
+                print("dt:          ", dt)
             avg_time_ha1[m.cow_idx] += dt
             count_ha1[m.cow_idx] += 1
 
@@ -708,8 +718,13 @@ for id in measurements:
             #    print("Negative time difference for id", id, dt)
             #    continue
             #print("ha2:", dt, id)
+            if id == 3588:
+                print("calving time:", calving_time)
+                print("ha2:         ", w)
+                print("dt:          ", dt)
             avg_time_ha2[m.cow_idx] += dt
             count_ha2[m.cow_idx] += 1
+
 print("12.) Average time between warnings and calving in hours (total):  ", sum(avg_time_ha1) / sum(count_ha1), "(ha1)", sum(avg_time_ha2) / sum(count_ha2), "(ha2)")
 print("                                                        (cows):   ", avg_time_ha1[0] / count_ha1[0], "(ha1)", avg_time_ha2[0] / count_ha2[0], "(ha2)")
 print("                                                        (heifers):", avg_time_ha1[1] / count_ha1[1], "(ha1)", avg_time_ha2[1] / count_ha2[1], "(ha2)")
@@ -800,7 +815,7 @@ print("   Average time in hours between HA1 and SonT if dt <= 2h:", np.array([d 
 
 
 # CSV with all HA1 and HA2 stuff
-with open("HA1_HA2_warnings.csv", "w") as fh:
+with open("HA1_HA2_warnings_48h.csv", "w") as fh:
     f = csv.writer(fh, delimiter=",")
     f.writerow(["Typ (HA1 / HA2)", "Kuh ID", "Status (Kuh / Faerse)", "Zeitstempel", "Umstallzeit", "Geburtszeit"])
     for id in measurements:
@@ -816,13 +831,189 @@ with open("HA1_HA2_warnings.csv", "w") as fh:
                 tgeburt = e.real_calving_time
 
         for w in m.ha1_warnings:
+            if (tumstall - w).total_seconds() / 3600. > 48.:
+                continue
             f.writerow(["HA1", str(id), status, str(w), str(tumstall), str(tgeburt)])
 
         for w in m.ha2_warnings:
+            if (tumstall - w).total_seconds() / 3600. > 48.:
+                continue
             f.writerow(["HA2", str(id), status, str(w), str(tumstall), str(tgeburt)])
 
+# CSV with all events and stuff
+with open("Events.csv", "w") as fh:
+    f = csv.writer(fh, delimiter=";")
+    f.writerow(["Event Typ", "Startzeit", "Endzeit", "Kuh ID", "Status (Kuh / Faerse)"])
+    for id in measurements:
+        if not measurements[id].did_calve:
+            continue
+
+        m = measurements[id]
+        status = "Kuh" if not m.is_heifer else "Faerse"
+        for e in m.events:
+            f.writerow([e.score, str(e.start), str(e.end), str(id), status])
+
+ha1_per_event23 = []
+ha2_per_event23 = []
+ha1_without_event23 = []
+ha2_without_event23 = []
+for id in measurements:
+    if not measurements[id].did_calve:
+        continue
+
+    m = measurements[id]
+    has2or3 = len([1 for e in m.events if e.score == 2 or e.score == 3]) > 0
+
+    calving_time = None
+    for e in m.events:
+        if e.score == 1:
+            calving_time = deepcopy(e.end)
+    assert calving_time is not None, "lol"
+
+    num_ha1 = 0
+    for w in m.ha1_warnings:
+        dt = (calving_time - w).total_seconds() / 3600.
+        if dt < 48.:
+            num_ha1 += 1
+
+    num_ha2 = 0
+    for w in m.ha2_warnings:
+        dt = (calving_time - w).total_seconds() / 3600.
+        if dt < 48.:
+            num_ha2 += 1
+
+    if has2or3:
+        ha1_per_event23.append(num_ha1)
+        ha2_per_event23.append(num_ha2)
+    else:
+        ha1_without_event23.append(num_ha1)
+        ha2_without_event23.append(num_ha2)
+
+ha1_per_event23 = np.array(ha1_per_event23)
+ha2_per_event23 = np.array(ha2_per_event23)
+ha1_without_event23 = np.array(ha1_without_event23)
+ha2_without_event23 = np.array(ha2_without_event23)
+
+print("HA1 with event 2 or 3:                 ", ha1_per_event23.mean())
+print("HA2 with event 2 or 3:                 ", ha2_per_event23.mean())
+print("HA1 without event 2 or 3:              ", ha1_without_event23.mean())
+print("HA2 without event 2 or 3:              ", ha2_without_event23.mean())
+print("Number of animals with event 2 or 3:   ", ha1_per_event23.size)
+print("Number of animals without event 2 or 3:", ha1_without_event23.size)
+
+# CSV with event 2/3
+max_e2 = 6 # maximum number of event 2 within 48h before umstallung
+max_e3 = 6
+with open("Anzahl_HA1_HA2_Meldungen_wenn_Event_2_3.csv", "w") as fh:
+    f = csv.writer(fh, delimiter=";")
+    header = ["Kuh ID", "Status (Kuh / Faerse)", "Anzahl Events 2", "Anzahl Events 3", "Anzahl HA1 Meldungen", "Anzahl HA2 Meldungen"]
+    for i in range(max_e2):
+        header += ["Event 2 #" + str(i+1), "Event 2 Moocall Score #" + str(i+1)]
+    for i in range(max_e2):
+        header += ["Event 3 #" + str(i+1), "Event 3 Moocall Score #" + str(i+1)]
+    for i in range(6):
+        header += ["HA1 #" + str(i+1)]
+    for i in range(4):
+        header += ["HA2 #" + str(i+1)]
+    f.writerow(header)
+
+    for id in measurements:
+        if not measurements[id].did_calve:
+            continue
+
+        m = measurements[id]
+
+        calving_time = None
+        for e in m.events:
+            if e.score == 1:
+                calving_time = deepcopy(e.end)
+        assert calving_time is not None, "lol"
+
+        status = "Kuh" if not m.is_heifer else "Faerse"
+
+        e2 = []
+        e3 = []
+        for e in m.events:
+            if (calving_time - e.end).total_seconds() / 3600. > 48.:
+                continue
+            if e.score == 2:
+                e2.append(e.end)
+                e2.append(e.moocall_score if e.moocall_score is not None else "")
+            elif e.score == 3:
+                e3.append(e.end)
+                e3.append(e.moocall_score if e.moocall_score is not None else "")
+
+        if len(e2) == 0 and len(e3) == 0:
+            continue
+        num_e2 = len(e2)
+        num_e3 = len(e3)
+
+        while len(e2) < 2*max_e2:
+            e2.append("")
+        while len(e3) < 2*max_e3:
+            e3.append("")
+
+        ha1 = []
+        for w in m.ha1_warnings:
+            dt = (calving_time - w).total_seconds() / 3600.
+            if dt < 48.:
+                ha1.append(str(w))
+        num_ha1 = len(ha1)
+        while len(ha1) < 6:
+            ha1.append("")
+
+        ha2 = []
+        for w in m.ha2_warnings:
+            dt = (calving_time - w).total_seconds() / 3600.
+            if dt < 48.:
+                ha2.append(str(w))
+        num_ha2 = len(ha2)
+        while len(ha2) < 6:
+            ha2.append("")
+
+        f.writerow([id, status, num_e2, num_e3, num_ha1, num_ha2] + e2 + e3 + ha1 + ha2)
+
+with open("./Events_2_und_3.csv", "w") as fh:
+    f = csv.writer(fh, delimiter=";")
+    f.writerow(["Typ (Event 2 / Event 3)", "Kuh ID", "Status (Kuh / Faerse)", "Zeitstempel", "Moocall Score"])
+
+    for id in measurements:
+        if not measurements[id].did_calve:
+            continue
+
+        m = measurements[id]
+        calving_time = None
+        for e in m.events:
+            if e.score == 1:
+                calving_time = deepcopy(e.end)
+        assert calving_time is not None, "lol"
+
+        status = "Kuh" if not m.is_heifer else "Faerse"
+
+        for e in m.events:
+            if (calving_time - e.end).total_seconds() / 3600. > 48.:
+                continue
+            if e.score != 2 and e.score != 3:
+                continue
+            f.writerow([e.score, id, status, e.end] + [e.moocall_score if e.moocall_score is not None else ""])
 
 
+
+
+# Geburtsverlauf nach Kuh und Färse
+with open("./Voss-Moocall-Geburtsverlauf_Korrelation_Dystokie_24-Jul-2018.csv") as fh:
+    data = list(csv.reader(fh, delimiter=";"))
+
+with open("./Voss-Moocall-Geburtsverlauf_Korrelation_Dystokie_Kuh_Faerse_24-Jul-2018.csv", "w") as fh:
+    writer = csv.writer(fh, delimiter=";")
+    writer.writerow(data[0] + ["Status (Kuh / Faerse)"])
+    for d in data[1:]:
+        animal = int(d[0])
+        for id in measurements:
+            if animal != id:
+                continue
+            assert measurements[id].did_calve, "What!?"
+            writer.writerow(d + ["Faerse" if measurements[id].is_heifer else "Kuh"])
 
 
 # At the end, all the time
