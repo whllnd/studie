@@ -1103,7 +1103,7 @@ with open("Kuehe_alle.csv", "w") as fh:
                 tgeburt = e.real_calving_time
         f.writerow([id, status, calved, geburtsverlauf, tumstall, tgeburt, len(m.ha1_warnings), len(m.ha2_warnings), len(m.events)])
 
-# Events pro Tier, OP, Episode
+# Events pro Tier, OP, Episode (nur Kalbungen)
 devents = { 1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 7:0, 8:0, 9:0 }
 devents_cows = { 1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 7:0, 8:0, 9:0 }
 devents_heifers = { 1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 7:0, 8:0, 9:0 }
@@ -1134,6 +1134,7 @@ for id in measurements:
         else:
             devents_cows[e.score] += 1
 
+print("Events Calvings ---")
 print("Events (total):", devents)
 print("Events (cows):", devents_cows)
 print("Events (heifers):", devents_heifers)
@@ -1161,26 +1162,72 @@ print("#animals:           ", ncows + nheifers)
 print("#cows:              ", ncows)
 print("#heifers:           ", nheifers)
 
-print("Events for all animals that calved (cows and heifers):")
-for e in devents:
-    print("Event score", e)
-    print("   per animal: ", devents[e] / (ncows + nheifers))
-    print("   per op:     ", devents[e] / (ncows + nheifers))
-    print("   per episode:", devents[e] / (episodes_cows + episodes_heifers))
+# Events pro Tier, OP, Episode (alle Tiere)
+devents = { 1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 7:0, 8:0, 9:0 }
+devents_cows = { 1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 7:0, 8:0, 9:0 }
+devents_heifers = { 1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 7:0, 8:0, 9:0 }
+episodes_cows = 0
+episodes_heifers = 0
+op_cows = 0
+op_heifers = 0
+ncows = 0
+nheifers = 0
+for id in measurements:
+    m = measurements[id]
 
-print("Events for all cows that calved:")
-for e in devents_cows:
-    print("Event score", e)
-    print("   per cow:    ", devents[e] / ncows)
-    print("   per op:     ", devents[e] / ncows)
-    print("   per episode:", devents[e] / episodes_cows)
+    if m.is_heifer:
+        nheifers += 1
+        op_heifers += m.carry_time
+        episodes_heifers += len(m.events)
+    else:
+        ncows += 1
+        op_cows += m.carry_time
+        episodes_cows += len(m.events)
 
-print("Events for all heifers that calved:")
-for e in devents_heifers:
-    print("Event score", e)
-    print("   per cow:    ", devents[e] / nheifers)
-    print("   per op:     ", devents[e] / nheifers)
-    print("   per episode:", devents[e] / episodes_heifers)
+    for e in m.events:
+        devents[e.score] += 1
+        if m.is_heifer:
+            devents_heifers[e.score] += 1
+        else:
+            devents_cows[e.score] += 1
+
+print("Events All Animals ---")
+print("Events (total):", devents)
+print("Events (cows):", devents_cows)
+print("Events (heifers):", devents_heifers)
+
+with open("Events_aller_Tiere_pro_Tier_OP_und_Episode.csv", "w") as fh:
+    f = csv.writer(fh, delimiter=";")
+    f.writerow(["Event Score", "Gesamtanzahl", "Anzahl Kuehe", "Anzahl Faersen",
+                "Pro Tier", "Pro Kuh", "Pro Faerse",
+                "Pro OP [1/h]", "Pro OP (Kuh) [1/h]", "Pro OP (Faerse) [1/h]",
+                "Pro Episode", "Pro Episode (Kuh)", "Pro Episode (Faerse)"])
+
+    for e in devents:
+        ta = str(devents[e] / (ncows + nheifers)).replace(".", ",")
+        tc = str(devents_cows[e] / ncows).replace(".", ",")
+        th = str(devents_heifers[e] / nheifers).replace(".", ",")
+        oa = str(devents[e] / (op_cows + op_heifers)).replace(".", ",")
+        oc = str(devents_cows[e] / op_cows).replace(".", ",")
+        oh = str(devents_heifers[e] / op_heifers).replace(".", ",")
+        ea = str(devents[e] / (episodes_cows + episodes_heifers)).replace(".", ",")
+        ec = str(devents_cows[e] / episodes_cows).replace(".", ",")
+        eh = str(devents_heifers[e] / episodes_heifers).replace(".", ",")
+
+        f.writerow([e, devents[e], devents_cows[e], devents_heifers[e],
+                    ta, tc, th,
+                    oa, oc, oh,
+                    ea, ec, eh])
+
+print("#episodes (total):  ", episodes_cows + episodes_heifers)
+print("#episodes (cows):   ", episodes_cows)
+print("#episodes (heifers):", episodes_heifers)
+print("op (total):         ", op_cows + op_heifers)
+print("op (cows):          ", op_cows)
+print("op (heifers):       ", op_heifers)
+print("#animals:           ", ncows + nheifers)
+print("#cows:              ", ncows)
+print("#heifers:           ", nheifers)
 
 # IDs and stuff
 with open("./ROHDATEN-sortiert-26-Jul-2018.csv") as fh:
