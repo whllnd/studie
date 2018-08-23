@@ -36,11 +36,12 @@ heifers = [
 
 class event:
     def __init__(self): # , start_time, end_time, score):
-        self.start = None
-        self.end = None
+        self.start = None # Column B or "SonT"
+        self.end = None   # Column F or "Event"
         self.score = None
         self.real_calving_time = None
         self.moocall_score = None
+        self.sensor_off_tail = None
 
     def __lt__(self, other):
         return self.start < other.start
@@ -296,6 +297,16 @@ def process(batch, measurements, study):
                     raise
 
                 e.end = parse_time(line[F])
+
+            if len(line[E]) > 0:
+
+                if e.sensor_off_tail is not None:
+                    print("Should be None, that sensor_off_tail:", i, id)
+                    raise
+
+                e.sensor_off_tail = parse_time(line[E])
+            else:
+                e.sensor_off_tail = ""
 
         if e.end is None or e.start is None:
             print("Both event times are None for id", id)
@@ -600,7 +611,7 @@ print("04.) Average time between F and I (total):   ", sum(f_to_i) / sum(calving
 print("                                  (cows):    ", np.array(f_to_i_cows).mean())
 print("                                  (heifers): ", np.array(f_to_i_heif).mean())
 
-# 4.b) Anzahl HA1 und HA2 bei Färsen und Kühen
+# 4.b) Anzahl HA1 und HA2 bei Faersen und Kuehen
 ha1 = [0,0] # [cows, heifers]
 ha2 = [0,0]
 for id in measurements:
@@ -813,17 +824,26 @@ print("   Number of times HA1 occured within first 2h after SonT:", within_heife
 print("   Average time in hours between HA1 and SonT if dt <= 2h:", np.array([d for d in dt_heifers if d <= 2 * 3600]).mean() / 3600)
 
 
+with open("./Voss-Moocall-Geburtsverlauf_Korrelation_Dystokie_24-Jul-2018.csv") as fh:
+    verlauf = list(csv.reader(fh, delimiter=";"))[1:]
+
+verlaufs = {}
+for v in verlauf:
+    id = int(v[0])
+    geburtsverlauf = int(v[3])
+    verlaufs[id] = geburtsverlauf
 
 # CSV with all HA1 and HA2 stuff
 with open("HA1_HA2_warnings_48h.csv", "w") as fh:
-    f = csv.writer(fh, delimiter=",")
-    f.writerow(["Typ (HA1 / HA2)", "Kuh ID", "Status (Kuh / Faerse)", "Zeitstempel", "Umstallzeit", "Geburtszeit"])
+    f = csv.writer(fh, delimiter=";")
+    f.writerow(["Typ (HA1 / HA2)", "Kuh ID", "Status (Kuh / Faerse)", "Zeitstempel", "Umstallzeit", "Geburtszeit", "Geburtsverlauf"])
     for id in measurements:
         if not measurements[id].did_calve:
             continue
 
         m = measurements[id]
         status = "Kuh" if not m.is_heifer else "Faerse"
+        geburtsverlauf = verlaufs[id]
         tumstall, tgeburt = None, None
         for e in m.events:
             if e.score == 1:
@@ -833,12 +853,46 @@ with open("HA1_HA2_warnings_48h.csv", "w") as fh:
         for w in m.ha1_warnings:
             if (tumstall - w).total_seconds() / 3600. > 48.:
                 continue
-            f.writerow(["HA1", str(id), status, str(w), str(tumstall), str(tgeburt)])
+            f.writerow(["HA1", str(id), status, str(w), str(tumstall), str(tgeburt), geburtsverlauf])
 
         for w in m.ha2_warnings:
             if (tumstall - w).total_seconds() / 3600. > 48.:
                 continue
-            f.writerow(["HA2", str(id), status, str(w), str(tumstall), str(tgeburt)])
+            f.writerow(["HA2", str(id), status, str(w), str(tumstall), str(tgeburt), geburtsverlauf])
+
+# Jeweils letzte Alarme
+with open("Last_HA1_HA2_warnings_per_animal_48h.csv", "w") as fh:
+    f = csv.writer(fh, delimiter=";")
+    f.writerow(["Kuh ID", "Status (Kuh=1 / Faerse=0)", "Anzahl HA1 Alarme (48h)", "Anzahl HA2 Alarme (48h)", "Zeitstempel letzter HA1 Alarm", "Zeitstempel letzter HA2 Alarm", "Umstallzeit", "Geburtszeit", "Geburtsverlauf"])
+    for id in measurements:
+        if not measurements[id].did_calve:
+            continue
+
+        m = measurements[id]
+        #status = "Kuh" if not m.is_heifer else "Faerse"
+        status = 0 if m.is_heifer else 1
+        geburtsverlauf = verlaufs[id]
+        tumstall, tgeburt = None, None
+        for e in m.events:
+            if e.score == 1:
+                tumstall = e.end
+                tgeburt = e.real_calving_time
+
+        ha1 = []
+        for w in m.ha1_warnings:
+            if (tumstall - w).total_seconds() / 3600. > 48.:
+                continue
+            ha1.append(w)
+        last_HA1 = "" if len(ha1) == 0 else str(max(ha1))
+
+        ha2 = []
+        for w in m.ha2_warnings:
+            if (tumstall - w).total_seconds() / 3600. > 48.:
+                continue
+            ha2.append(w)
+        last_HA2 = "" if len(ha2) == 0 else str(max(ha2))
+
+        f.writerow([str(id), status, len(ha1), len(ha2), last_HA1, last_HA2, str(tumstall), str(tgeburt), geburtsverlauf])
 
 # CSV with all events and stuff
 with open("Events.csv", "w") as fh:
@@ -1015,6 +1069,131 @@ with open("./Voss-Moocall-Geburtsverlauf_Korrelation_Dystokie_Kuh_Faerse_24-Jul-
             assert measurements[id].did_calve, "What!?"
             writer.writerow(d + ["Faerse" if measurements[id].is_heifer else "Kuh"])
 
+# EVERYTHING
+with open("HA1-HA2-Warnungen_alle.csv", "w") as fh:
+    f = csv.writer(fh, delimiter=";")
+    f.writerow(["Kuh ID", "Typ (HA1/HA2)", "Zeitstempel"])
+    for id in measurements:
+        m = measurements[id]
+        for w in m.ha1_warnings:
+            f.writerow([id, "HA1", w])
+        for w in m.ha2_warnings:
+            f.writerow([id, "HA2", w])
+
+with open("Events_alle.csv", "w") as fh:
+    f = csv.writer(fh, delimiter=";")
+    f.writerow(["Kuh ID", "Event-Score", "Moocall-Score", "Zeitstempel", "Sensor-On-Tail", "Sensor-Off-Tail"])
+    for id in measurements:
+        m = measurements[id]
+        for e in m.events:
+            f.writerow([id, e.score, e.moocall_score, e.end, e.start, e.sensor_off_tail])
+
+with open("Kuehe_alle.csv", "w") as fh:
+    f = csv.writer(fh, delimiter=";")
+    f.writerow(["Kuh ID", "Kuh / Faerse", "Kalbung (0=nein, 1=ja)", "Geburtsverlauf", "Umstallzeit", "Geburtszeit", "Anzahl HA1 Warnungen", "Anzahl HA2 Warnungen", "Anzahl Events"])
+    for id in measurements:
+        m = measurements[id]
+        status = "Faerse" if m.is_heifer else "Kuh"
+        calved = 1 if m.did_calve else 0
+        geburtsverlauf = "" if 0 == calved else verlaufs[id]
+        tumstall, tgeburt = "", ""
+        for e in m.events:
+            if e.score == 1:
+                tumstall = e.end
+                tgeburt = e.real_calving_time
+        f.writerow([id, status, calved, geburtsverlauf, tumstall, tgeburt, len(m.ha1_warnings), len(m.ha2_warnings), len(m.events)])
+
+# Events pro Tier, OP, Episode
+devents = { 1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 7:0, 8:0, 9:0 }
+devents_cows = { 1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 7:0, 8:0, 9:0 }
+devents_heifers = { 1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 7:0, 8:0, 9:0 }
+episodes_cows = 0
+episodes_heifers = 0
+op_cows = 0
+op_heifers = 0
+ncows = 0
+nheifers = 0
+for id in measurements:
+    if not measurements[id].did_calve:
+        continue
+    m = measurements[id]
+
+    if m.is_heifer:
+        nheifers += 1
+        op_heifers += m.carry_time
+        episodes_heifers += len(m.events)
+    else:
+        ncows += 1
+        op_cows += m.carry_time
+        episodes_cows += len(m.events)
+
+    for e in m.events:
+        devents[e.score] += 1
+        if m.is_heifer:
+            devents_heifers[e.score] += 1
+        else:
+            devents_cows[e.score] += 1
+
+print("Events (total):", devents)
+print("Events (cows):", devents_cows)
+print("Events (heifers):", devents_heifers)
+
+with open("Events_kalbender_Tiere_pro_Tier_OP_und_Episode.csv", "w") as fh:
+    f = csv.writer(fh, delimiter=";")
+    f.writerow(["Event Score", "Gesamtanzahl", "Anzahl Kuehe", "Anzahl Faersen",
+                "Pro Tier", "Pro Kuh", "Pro Faerse",
+                "Pro OP [1/h]", "Pro OP (Kuh) [1/h]", "Pro OP (Faerse) [1/h]",
+                "Pro Episode", "Pro Episode (Kuh)", "Pro Episode (Faerse)"])
+
+    for e in devents:
+        f.writerow([e, devents[e], devents_cows[e], devents_heifers[e],
+                    devents[e] / (ncows + nheifers), devents_cows[e] / ncows, devents_heifers[e] / nheifers,
+                    devents[e] / (op_cows + op_heifers), devents_cows[e] / op_cows, devents_heifers[e] / op_heifers,
+                    devents[e] / (episodes_cows + episodes_heifers), devents_cows[e] / episodes_cows, devents_heifers[e] / episodes_heifers])
+
+print("#episodes (total):  ", episodes_cows + episodes_heifers)
+print("#episodes (cows):   ", episodes_cows)
+print("#episodes (heifers):", episodes_heifers)
+print("op (total):         ", op_cows + op_heifers)
+print("op (cows):          ", op_cows)
+print("op (heifers):       ", op_heifers)
+print("#animals:           ", ncows + nheifers)
+print("#cows:              ", ncows)
+print("#heifers:           ", nheifers)
+
+print("Events for all animals that calved (cows and heifers):")
+for e in devents:
+    print("Event score", e)
+    print("   per animal: ", devents[e] / (ncows + nheifers))
+    print("   per op:     ", devents[e] / (ncows + nheifers))
+    print("   per episode:", devents[e] / (episodes_cows + episodes_heifers))
+
+print("Events for all cows that calved:")
+for e in devents_cows:
+    print("Event score", e)
+    print("   per cow:    ", devents[e] / ncows)
+    print("   per op:     ", devents[e] / ncows)
+    print("   per episode:", devents[e] / episodes_cows)
+
+print("Events for all heifers that calved:")
+for e in devents_heifers:
+    print("Event score", e)
+    print("   per cow:    ", devents[e] / nheifers)
+    print("   per op:     ", devents[e] / nheifers)
+    print("   per episode:", devents[e] / episodes_heifers)
+
+# IDs and stuff
+with open("./ROHDATEN-sortiert-26-Jul-2018.csv") as fh:
+    iddata = list(csv.reader(fh, delimiter=","))[1:]
+
+ids = set()
+for d in iddata:
+    ids.add(int(d[0]))
+
+evalids = [id for id in measurements]
+for id in ids:
+    if id not in evalids:
+        print("Not in evaluation:", id)
 
 # At the end, all the time
 #with open("./Geburtsverlauf-23-Jul-2018.csv") as fh:
