@@ -1177,6 +1177,8 @@ for id in measurements:
         print(id)
         continue
     m = measurements[id]
+    if id == 3622:
+        continue
 
     if m.is_heifer:
         nheifers += 1

@@ -89,7 +89,9 @@ def true_positives(measurements, lower, upper, study): # lower in hours, upper i
 
     return total_tp_ha1, total_tp_ha2
 
-def false_positives(measurements, lower, upper, study): # lower in hours, upper in minutes ...
+# lower in hours, upper in minutes, start_thresh in hours
+def false_positives(measurements, start_thresh, lower, upper, study):
+    assert start_thresh > lower, "Nah, that's not coolio!"
 
     total_fp_ha1 = 0
     total_fp_ha2 = 0
@@ -100,6 +102,9 @@ def false_positives(measurements, lower, upper, study): # lower in hours, upper 
         if m.study != study:
             continue
 
+        if not m.did_calve: # TODO: Decide if that is of interest
+            continue
+
         # TODO: This ignores warnings coming after calving ...
         end = deepcopy(m.events[-1].end)
         for e in m.events:
@@ -107,10 +112,16 @@ def false_positives(measurements, lower, upper, study): # lower in hours, upper 
                 end = deepcopy(e.end)
         if m.did_calve:
             end = e.end - datetime.timedelta(hours=lower) # Need to shift end to lower threshold
+        start = end - datetime.timedelta(hours=start_thresh)
 
         for e in m.events:
             if e.start > end: # TODO: Exclude those ...
                 continue
+
+            event_start = deepcopy(e.start)
+            if event_start < start:
+                event_start = deepcopy(start)
+
             event_end = deepcopy(e.end)
             if event_end > end:
                 event_end = deepcopy(end)
@@ -119,8 +130,8 @@ def false_positives(measurements, lower, upper, study): # lower in hours, upper 
                 print(e.start)
                 print(event_end)
 
-            total_fp_ha1 += sum([1 for w in m.ha1_warnings if w <= event_end and w >= e.start])
-            total_fp_ha2 += sum([1 for w in m.ha2_warnings if w <= event_end and w >= e.start])
+            total_fp_ha1 += sum([1 for w in m.ha1_warnings if w <= event_end and w >= event_start])
+            total_fp_ha2 += sum([1 for w in m.ha2_warnings if w <= event_end and w >= event_start])
             total_hours += (event_end - e.start).total_seconds() / 3600
 
     return total_fp_ha1, total_fp_ha2, int(total_hours)
@@ -490,7 +501,7 @@ print("                                  (studie 1):", f_to_i[0] / calvings[0])
 print("                                  (studie 2):", f_to_i[1] / calvings[1])
 
 # 5./6./7.) True positives, false positives, false negatives (TODO: fn = calvings - tp??)
-tp = [{}, {}]
+tp = [{}, {}] # [studie1, studie2]
 fp = [{}, {}]
 fn = [{}, {}]
 tn = [{}, {}]
