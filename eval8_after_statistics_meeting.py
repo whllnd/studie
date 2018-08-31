@@ -660,10 +660,14 @@ print("---")
 print("TP HA2 (1h):", tpHA2[0], "Verhältnis zu allen ersten HA2-Alarme:", tpHA2[0] / numFirstHA2)
 print("TP HA2 (2h):", tpHA2[1], "Verhältnis zu allen ersten HA2-Alarme:", tpHA2[1] / numFirstHA2)
 print("TP HA2 (3h):", tpHA2[2], "Verhältnis zu allen ersten HA2-Alarme:", tpHA2[2] / numFirstHA2)
+print("")
 
 # Tabelle 1 (misc)
-hours_all, hours_calved = 0, 0
+#hours_all, hours_calved = 0, 0
+hours_all, hours_calved = [], []
 time_before_calving = [0,0,[],[]] # carry time before umstall, umstall-geburt, ha1 calving, ha2 calving
+time_before_calving_cows = [0,0,[],[]]
+time_before_calving_heif = [0,0,[],[]]
 events = {1:0,2:0,3:0,4:0,5:0,6:0,7:0,8:0,9:0}
 for id in measurements:
     m = measurements[id]
@@ -674,9 +678,9 @@ for id in measurements:
         if dt < 0:
             print(id, e.start, e.end)
             raise
-        hours_all += dt
+        hours_all.append(dt)
         if m.did_calve:
-            hours_calved += dt
+            hours_calved.append(dt)
             if e.score == 1:
                 tumstall = e.end
 
@@ -685,27 +689,50 @@ for id in measurements:
             dt = (tumstall-w).total_seconds() / 3600.
             if dt >= 0.:
                 time_before_calving[2].append(dt)
+                if m.is_heifer:
+                    time_before_calving_heif[2].append(dt)
+                else:
+                    time_before_calving_cows[2].append(dt)
 
         for w in m.ha2_warnings:
             dt = (tumstall-w).total_seconds() / 3600.
             if dt >= 0.:
                 time_before_calving[3].append(dt)
+                if m.is_heifer:
+                    time_before_calving_heif[3].append(dt)
+                else:
+                    time_before_calving_cows[3].append(dt)
 
     if m.did_calve:
         time_before_calving[0] += sum([(e.end - e.start).total_seconds() / 3600. for e in m.events])
         time_before_calving[1] += (m.events[-1].real_calving_time - m.events[-1].end).total_seconds() / 3600.
+        if m.is_heifer:
+            time_before_calving_heif[0] += sum([(e.end - e.start).total_seconds() / 3600. for e in m.events])
+            time_before_calving_heif[1] += (m.events[-1].real_calving_time - m.events[-1].end).total_seconds() / 3600.
+        else:
+            time_before_calving_cows[0] += sum([(e.end - e.start).total_seconds() / 3600. for e in m.events])
+            time_before_calving_cows[1] += (m.events[-1].real_calving_time - m.events[-1].end).total_seconds() / 3600.
+
 
 print("Number of animals / cows / heifers:", 180, 180 - len(heifers), len(heifers))
 print("Number of calvings:", len([id for id in measurements if measurements[id].did_calve]))
-print("Total of hours monitored (180 animals): ", hours_all)
-print("Total of hours monitored (118 calvings):", hours_calved)
-print("Average time [h] sensor on tail before stage II: ", time_before_calving[0] / 118)
-print("Average time [h] between stage II and real birth:", time_before_calving[1] / 118)
-print("Average time [h] between first HA1 and stage II: ", np.array(time_before_calving[2]).mean())
-print("Average time [h] between first HA2 and stage II: ", np.array(time_before_calving[3]).mean())
-print("Total number of 1 hour RPs:", hours_all) # Should be the same
-print("#Event 2 / share:          ", events[2], events[2] / hours_all)
-print("#Event 3 / share:          ", events[3], events[3] / hours_all)
-print("#Event 4 / share:          ", events[4], events[4] / hours_all)
-print("#Event 5 / share:          ", events[5], events[5] / hours_all)
+print("Total of hours monitored (180 animals): ", sum(hours_all))
+print("Total of hours monitored (118 calvings):", sum(hours_calved))
+print("Average time [h] sensor on tail before stage II:        ", time_before_calving[0] / 118)
+print("Average time [h] between stage II and real birth:       ", time_before_calving[1] / 118)
+print("Average time [h] between first HA1 and stage II:        ", np.array(time_before_calving[2]).mean(), np.array(time_before_calving[2]).std())
+print("Average time [h] between first HA2 and stage II:        ", np.array(time_before_calving[3]).mean(), np.array(time_before_calving[3]).std())
+print("Average time [h] sensor on tail before stage II (cows): ", time_before_calving_cows[0] / 118)
+print("Average time [h] between stage II and real birth(cows):", time_before_calving_cows[1] / 118)
+print("Average time [h] between first HA1 and stage II (cows): ", np.array(time_before_calving_cows[2]).mean(), np.array(time_before_calving_cows[2]).std())
+print("Average time [h] between first HA2 and stage II (cows): ", np.array(time_before_calving_cows[3]).mean(), np.array(time_before_calving_cows[3]).std())
+print("Average time [h] sensor on tail before stage II (heif): ", time_before_calving_heif[0] / 118)
+print("Average time [h] between stage II and real birth(heif):", time_before_calving_heif[1] / 118)
+print("Average time [h] between first HA1 and stage II (heif): ", np.array(time_before_calving_heif[2]).mean(), np.array(time_before_calving_heif[2]).std())
+print("Average time [h] between first HA2 and stage II (heif): ", np.array(time_before_calving_heif[3]).mean(), np.array(time_before_calving_heif[3]).std())
+print("Total number of 1 hour RPs:", sum(hours_all)) # Should be the same
+print("#Event 2 / share:          ", events[2], events[2] / sum(hours_all))
+print("#Event 3 / share:          ", events[3], events[3] / sum(hours_all))
+print("#Event 4 / share:          ", events[4], events[4] / sum(hours_all))
+print("#Event 5 / share:          ", events[5], events[5] / sum(hours_all))
 print("Events:", events)
