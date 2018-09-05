@@ -57,6 +57,8 @@ class measurement:
         self.carry_time = 0
         self.did_calve = False
         self.is_heifer = self.id in heifers
+        self.real_calving_time = None
+        self.calving_condition = ""
         if self.is_heifer:
             self.cow_idx = 1
         else:
@@ -325,11 +327,15 @@ def process(batch, measurements, study):
             measurements[id].study = study
             measurements[id].ha1_warnings += [deepcopy(h1) for h1 in ha1s] # Be on the sure side and copy
             measurements[id].ha2_warnings += [deepcopy(h2) for h2 in ha2s]
+            if len(line[I]) > 0:
+                measurements[id].real_calving_time = parse_time(line[I])
         else:
             m = measurement(id, study)
             m.events.append(deepcopy(e))
             m.ha1_warnings += [deepcopy(h1) for h1 in ha1s] # Be on the sure side and copy
             m.ha2_warnings += [deepcopy(h2) for h2 in ha2s]
+            if len(line[I]) > 0:
+                m.real_calving_time = parse_time(line[I])
             measurements[id] = m
 
         e = event()
@@ -781,3 +787,47 @@ print("#Event 3 (share):          ", events[3], "(", events[3] / sum(hours_all),
 print("#Event 4 (share):          ", events[4], "(", events[4] / sum(hours_all), ")")
 print("#Event 5 (share):          ", events[5], "(", events[5] / sum(hours_all), ")")
 print("Events:", events)
+
+verlauf = {}
+with open("./Voss-Moocall-Geburtsverlauf_Korrelation_Dystokie_Kuh_Faerse_24-Jul-2018.csv") as fh:
+    data = list(csv.reader(fh, delimiter=";"))[1:]
+    for d in data:
+        id = int(d[0])
+        cond = int(d[3])
+        measurements[id].calving_condition = cond
+
+# Export data in a clean way
+with open("Rohdaten_2018-09-05.csv", "w") as fh:
+
+    f = csv.writer(fh, delimiter=";")
+    f.writerow(["ID", "Kuh/Faerse",
+                    "Gekalbt (ja/nein)", "Umstallzeit", "Echte Geburtszeit", "Geburtsverlauf",
+                    "Event (ja/nein)", "Event Score", "SonT", "Eventzeit", "SoffT", "Moocall Score",
+                    "Alarm (ja/nein)", "Alarmtyp (HA1/HA2)", "Alarmzeit"])
+
+    for id in measurements:
+
+        m = measurements[id]
+        status = "Faerse" if m.is_heifer else "Kuh"
+        calved = "ja" if m.did_calve else "nein"
+        tpart = "" if not m.did_calve else m.events[-1].end
+        if m.did_calve:
+            assert m.events[-1].score == 1
+        #tbirth = "" if m.real_calving_time is None else m.real_calving_time
+        if m.real_calving_time is None:
+            tbirth = m.events[-1].end + datetime.timedelta(hours=5)
+        else:
+            tbirth = m.real_calving_time
+
+        for e in m.events:
+            f.writerow([id, status, calved, tpart, tbirth, m.calving_condition, "ja", e.score, e.start, e.end, e.sensor_off_tail, e.moocall_score, "nein", "", ""])
+        for w in m.ha1_warnings:
+            f.writerow([id, status, calved, tpart, tbirth, m.calving_condition, "nein", "", "", "", "", "", "ja", "HA1h", w])
+        for w in m.ha2_warnings:
+            f.writerow([id, status, calved, tpart, tbirth, m.calving_condition, "nein", "", "", "", "", "", "ja", "HA2h", w])
+
+print(len(measurements))
+for id in measurements:
+    m = measurements[id]
+    if m.real_calving_time is None:
+        print(id)
