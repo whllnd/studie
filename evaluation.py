@@ -2,6 +2,7 @@ import csv
 import datetime
 import numpy as np
 import matplotlib.pyplot as plt
+import pprint
 
 # Convert time strings to datetime objects
 def parse_time(time):
@@ -83,7 +84,7 @@ def load_data(fname):
     # taking the sum of each event duration, i.e. the time between
     # event start (sensor on tail, sont) and event end (event time);
     # this can have a maximum uncertainty of two hours per event, so
-    # an animals maximum uncertainty is < number of events * 2h
+    # an animals maximum uncertainty is < number of animal's events * 2h
     for id in animals:
         for e in animals[id].events:
             assert e.event_time > e.sont
@@ -95,6 +96,8 @@ def load_data(fname):
 # Main #########################################################################
 
 animals = load_data("./Rohdaten_2018-09-05.csv")
+for id in [2641, 1899, 3909, 1304]:
+    del animals[id]
 
 # Number of animals
 n_cows = sum([1 for id in animals if not animals[id].is_heifer])
@@ -370,7 +373,7 @@ for score in first_events_total:
     print("\tCows:   ", first_events_cows[score], "(", first_events_cows[score] / n_cows, ")")
     print("\tHeifers:", first_events_heif[score], "(", first_events_heif[score] / n_heif, ")")
 
-print("\nTable 2: Event distribution for calvings only (118):")
+print("\nTable 2: Event distribution for calvings only (114):")
 print("----------------------------------------------------\n")
 print("Number of calvings:          ", n_calvings)
 print("Number of calvings (cows):   ", n_calvings_cows)
@@ -456,7 +459,7 @@ print("True positives HA2h 1h (relative to number of first alarms):", tp_ha2_1h 
 print("True positives HA2h 2h (relative to number of first alarms):", tp_ha2_2h / n_first_ha2)
 print("True positives HA2h 3h (relative to number of first alarms):", tp_ha2_3h / n_first_ha2)
 
-print("\nTime differences between alarms and rehousing time for calvings only (118):")
+print("\nTime differences between alarms and rehousing time for calvings only (114):")
 print("---------------------------------------------------------------------------\n")
 print("Average time between all HA1h and stage II [h]:            ", np.array(dt_ha1_stageII).mean())
 print("Average time between all HA1h and stage II (cows) [h]:     ", np.array(dt_ha1_stageII_cows).mean())
@@ -468,18 +471,150 @@ print("Average time between last HA1h and stage II [h]:           ", np.array(dt
 print("Average time between last HA1h and stage II (cows) [h]:    ", np.array(dt_last_ha1_stageII_cows).mean())
 print("Average time between last HA1h and stage II (heifers) [h]: ", np.array(dt_last_ha1_stageII_heif).mean())
 
-
 # Histogram
-hist = np.histogram(events_hist_total[2], bins=20)
-for score in events_hist_total:
-    if score == 1: # Skip calving event since it is the reference time
-        continue
-    hist = np.histogram(events_hist_total[score], bins=20)
-    plt.bar(hist[1][:-1], hist[0], width=4, label="Event " + str(score))
-plt.title("Time differences between event and time of parturition, i.e. rehousing")
-plt.xlabel("dt [h]")
-plt.ylabel("Number of events")
-plt.legend()
-plt.show()
+#hist = np.histogram(events_hist_total[2], bins=20)
+#for score in events_hist_total:
+#    if score == 1: # Skip calving event since it is the reference time
+#        continue
+#    hist = np.histogram(events_hist_total[score], bins=20)
+#    plt.bar(hist[1][:-1], hist[0], width=4, label="Event " + str(score))
+#plt.title("Time differences between event and stage II, i.e. rehousing (114 animals)")
+#plt.xlabel("dt [h]")
+#plt.ylabel("Number of events")
+#plt.legend()
+#plt.show()
 
+# Extensions
+#print("Alarms that don't fall into an event duration:") # There are some
+#for id in animals:
+#    a = animals[id]
+#    for w in a.ha1_alarms:
+#        for i in range(1, len(a.events)):
+#            if w < a.events[i].sont and w > a.events[i-1].event_time:
+#                print(id, w, a.events[i].sont, a.events[i-1].event_time)
+
+#print("Events that do not obey order:") # There are none
+#for id in animals:
+#    a = animals[id]
+#    for i in range(1, len(a.events)):
+#        if a.events[i-1].event_time > a.events[i].sont:
+#            print(id, a.events[i-1].event_time, a.events[i].sont)
+
+for thresh in [1,2,3]:
+    with open("./statistik_dude_2018-09-10/malte/confusion_table_" + str(thresh) + "h.csv", "w") as fh:
+        f = csv.writer(fh, delimiter=";")
+        #f.writerow(["ID", "RN (HA1h)", "FN (HA1h)", "RP (HA1h)", "FP (HA1h)", "Sensitivitaet (HA1h)", "Spezifitaet (HA1h)", "PPV (HA1h)", "NPV (HA1h)", "RN (HA2h)", "FN (HA2h)", "RP (HA2h)", "FP (HA2h)", "Sensitivitaet (HA2h)", "Spezifitaet (HA2h)", "PPV (HA2h)", "NPV (HA2h)"])
+        f.writerow(["ID", "RN", "FN", "RP", "FP", "Sensitivitaet", "Spezifitaet", "PPV", "NPV"])
+
+        for id in animals:
+            a = animals[id]
+            if not a.calved:
+                continue
+
+            # Determine
+            # Determine gaps between events
+            gaps = []
+            for i in range(1, len(a.events)):
+                gaps.append([a.events[i-1].event_time, a.events[i].sont])
+            assert len(gaps)+1 == len(a.events)
+
+            # Calculate net time between alarm and rehousing/stage II
+            d_ha1 = {}
+            for w in a.ha1_alarms:
+                dt = (a.rehousing_time - w).total_seconds() / 3600.
+                if dt < 0:
+                    continue
+                for g in reversed(gaps):
+                    if w < g[0]:
+                        dt -= (g[1]-g[0]).total_seconds() / 3600.
+                    elif w < g[1]:
+                        dt -= (g[1]-w).total_seconds() / 3600.
+                        break
+                    else:
+                        break
+                k = int(dt // thresh) # Determine "bin"
+                if k in d_ha1:
+                    d_ha1[k] += 1 # Keep actual count
+                else:
+                    d_ha1[k] = 1
+
+            d_ha2 = {}
+            for w in a.ha2_alarms:
+                dt = (a.rehousing_time - w).total_seconds() / 3600.
+                if dt < 0:
+                    continue
+                for g in reversed(gaps):
+                    if w < g[0]:
+                        dt -= (g[1]-g[0]).total_seconds() / 3600.
+                    elif w < g[1]:
+                        dt -= (g[1]-w).total_seconds() / 3600.
+                        break
+                    else:
+                        break
+                k = int(dt // thresh) # Determine "bin"
+                if k in d_ha2:
+                    d_ha2[k] += 1 # Keep actual count
+                else:
+                    d_ha2[k] = 1
+
+            d_all = {}
+            for k in d_ha1:
+                d_all[k] = d_ha1[k]
+            for k in d_ha2:
+                if k in d_all:
+                    d_all[k] += d_ha2[k]
+                else:
+                    d_all[k] = d_ha2[k]
+
+            # Calculate TP, FP, TN, FN
+            nbins = int(a.device_duration / thresh) + 1 # This benefits Moocall
+            FP = len([k for k in d_all if k != 0])
+            RP = 1 if 0 in d_all else 0
+            RN = nbins - 1 - FP
+            if RN == -1:
+                print(d_all)
+                print(FP)
+                raise
+            FN = 1 if 0 not in d_all else 0
+            if RP + FN > 0:
+                se = RP / (RP + FN)
+            else:
+                se = ""
+            if RN + FP > 0:
+                sp = RN / (RN + FP)
+            else:
+                sp = ""
+            if RP + FP > 0:
+                ppv = RP / (RP + FP)
+            else:
+                ppv = ""
+            if RN + FN > 0:
+                npv = RN / (RN + FN)
+            else:
+                npv = ""
+
+            f.writerow([id, RN, FN, RP, FP, se, sp, ppv, npv])
+
+            # Individual
+            #FP1 = len([k for k in d_ha1 if k != 0])
+            #RP1 = 1 if 0 in d_ha1 else 0
+            #RN1 = nbins - 1 - FP1
+            #FN1 = 1 if 0 not in d_ha1 else 0
+            #assert RP1 + FN1 == 1
+            #se1 = RP1 / (RP1 + FN1)
+            #sp1 = RN1 / (RN1 + FP1)
+            #ppv1 = RP1 / (RP1 + FP1)
+            #npv1 = RN1 / (RN1 + FN1)
+
+            #FP2 = len([k for k in d_ha2 if k != 0])
+            #RP2 = 1 if 0 in d_ha2 else 0
+            #RN2 = nbins - 1 - FP2
+            #FN2 = 1 if 0 not in d_ha2 else 0
+            #assert RP2 + FN2 == 1
+            #se2 = RP2 / (RP2 + FN2)
+            #sp2 = RN2 / (RN2 + FP2)
+            #ppv2 = RP2 / (RP2 + FP2)
+            #npv2 = RN2 / (RN2 + FN2)
+
+            #f.writerow([id, RN1, FN1, RP1, FP1, se1, sp1, ppv1, npv1, RN2, FN2, RP2, FP2, se2, sp2, ppv2, npv2])
 

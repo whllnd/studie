@@ -1,0 +1,102 @@
+[1] "Zeitintervall 1"
+          Outcome +    Outcome -      Total
+Test +           42          260        302
+Test -           72         7778       7850
+Total           114         8038       8152
+
+Point estimates and 95 % CIs:
+---------------------------------------------------------
+Apparent prevalence                    0.04 (0.03, 0.04)
+True prevalence                        0.01 (0.01, 0.02)
+Sensitivity                            0.37 (0.28, 0.46)
+Specificity                            0.97 (0.96, 0.97)
+Positive predictive value              0.14 (0.10, 0.18)
+Negative predictive value              0.99 (0.99, 0.99)
+Positive likelihood ratio              11.39 (8.71, 14.90)
+Negative likelihood ratio              0.65 (0.57, 0.75)
+---------------------------------------------------------
+[1] "Zeitintervall 2"
+          Outcome +    Outcome -      Total
+Test +           67          181        248
+Test -           47         3818       3865
+Total           114         3999       4113
+
+Point estimates and 95 % CIs:
+---------------------------------------------------------
+Apparent prevalence                    0.06 (0.05, 0.07)
+True prevalence                        0.03 (0.02, 0.03)
+Sensitivity                            0.59 (0.49, 0.68)
+Specificity                            0.95 (0.95, 0.96)
+Positive predictive value              0.27 (0.22, 0.33)
+Negative predictive value              0.99 (0.98, 0.99)
+Positive likelihood ratio              12.99 (10.53, 16.01)
+Negative likelihood ratio              0.43 (0.35, 0.54)
+---------------------------------------------------------
+[1] "Zeitintervall 3"
+          Outcome +    Outcome -      Total
+Test +           75          148        223
+Test -           39         2508       2547
+Total           114         2656       2770
+
+Point estimates and 95 % CIs:
+---------------------------------------------------------
+Apparent prevalence                    0.08 (0.07, 0.09)
+True prevalence                        0.04 (0.03, 0.05)
+Sensitivity                            0.66 (0.56, 0.74)
+Specificity                            0.94 (0.93, 0.95)
+Positive predictive value              0.34 (0.27, 0.40)
+Negative predictive value              0.98 (0.98, 0.99)
+Positive likelihood ratio              11.81 (9.62, 14.49)
+Negative likelihood ratio              0.36 (0.28, 0.47)
+---------------------------------------------------------
+[1] "Zeitintervall 4"
+          Outcome +    Outcome -      Total
+Test +           78          244        322
+Test -           36         1851       1887
+Total           114         2095       2209
+
+Point estimates and 95 % CIs:
+---------------------------------------------------------
+Apparent prevalence                    0.15 (0.13, 0.16)
+True prevalence                        0.05 (0.04, 0.06)
+Sensitivity                            0.68 (0.59, 0.77)
+Specificity                            0.88 (0.87, 0.90)
+Positive predictive value              0.24 (0.20, 0.29)
+Negative predictive value              0.98 (0.97, 0.99)
+Positive likelihood ratio              5.87 (4.95, 6.97)
+Negative likelihood ratio              0.36 (0.27, 0.47)
+---------------------------------------------------------
+[1] "Zeitintervall 5"
+          Outcome +    Outcome -      Total
+Test +           78          237        315
+Test -           36         1463       1499
+Total           114         1700       1814
+
+Point estimates and 95 % CIs:
+---------------------------------------------------------
+Apparent prevalence                    0.17 (0.16, 0.19)
+True prevalence                        0.06 (0.05, 0.08)
+Sensitivity                            0.68 (0.59, 0.77)
+Specificity                            0.86 (0.84, 0.88)
+Positive predictive value              0.25 (0.20, 0.30)
+Negative predictive value              0.98 (0.97, 0.98)
+Positive likelihood ratio              4.91 (4.13, 5.83)
+Negative likelihood ratio              0.37 (0.28, 0.48)
+---------------------------------------------------------
+[1] "Zeitintervall 6"
+          Outcome +    Outcome -      Total
+Test +           79          227        306
+Test -           35         1200       1235
+Total           114         1427       1541
+
+Point estimates and 95 % CIs:
+---------------------------------------------------------
+Apparent prevalence                    0.20 (0.18, 0.22)
+True prevalence                        0.07 (0.06, 0.09)
+Sensitivity                            0.69 (0.60, 0.78)
+Specificity                            0.84 (0.82, 0.86)
+Positive predictive value              0.26 (0.21, 0.31)
+Negative predictive value              0.97 (0.96, 0.98)
+Positive likelihood ratio              4.36 (3.67, 5.17)
+Negative likelihood ratio              0.37 (0.28, 0.48)
+---------------------------------------------------------
