@@ -721,21 +721,24 @@ for id in measurements:
                 min_dt_ha2 = min(min_dt_ha2, dt)
                 max_dt_ha2 = max(max_dt_ha2, dt)
 
-        if min_dt_ha1 < np.inf and min_dt_ha2 < np.inf:
+        if min_dt_ha1 < np.inf: # and min_dt_ha2 < np.inf:
             first_ha1_all.append(max_dt_ha1)
             last_ha1_all.append(min_dt_ha1)
+        if min_dt_ha2 < np.inf:
             first_ha2_all.append(max_dt_ha2)
             last_ha2_all.append(min_dt_ha2)
         if m.is_heifer:
-            if min_dt_ha1 < np.inf and min_dt_ha2 < np.inf:
+            if min_dt_ha1 < np.inf: # and min_dt_ha2 < np.inf:
                 first_ha1_heif.append(max_dt_ha1)
                 last_ha1_heif.append(min_dt_ha1)
+            if min_dt_ha2 < np.inf:
                 first_ha2_heif.append(max_dt_ha2)
                 last_ha2_heif.append(min_dt_ha2)
         else:
-            if min_dt_ha1 < np.inf and min_dt_ha2 < np.inf:
+            if min_dt_ha1 < np.inf:# and min_dt_ha2 < np.inf:
                 first_ha1_cows.append(max_dt_ha1)
                 last_ha1_cows.append(min_dt_ha1)
+            if min_dt_ha2 < np.inf:
                 first_ha2_cows.append(max_dt_ha2)
                 last_ha2_cows.append(min_dt_ha2)
 
