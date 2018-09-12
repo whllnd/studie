@@ -485,13 +485,34 @@ print("Average time between last HA1h and stage II (heifers) [h]: ", np.array(dt
 #plt.show()
 
 # Extensions
-#print("Alarms that don't fall into an event duration:") # There are some
-#for id in animals:
-#    a = animals[id]
-#    for w in a.ha1_alarms:
-#        for i in range(1, len(a.events)):
-#            if w < a.events[i].sont and w > a.events[i-1].event_time:
-#                print(id, w, a.events[i].sont, a.events[i-1].event_time)
+alarms_inside_gaps = []
+for id in animals:
+    a = animals[id]
+    for w in a.ha1_alarms:
+        for i in range(1, len(a.events)):
+            if w < a.events[i].sont and w > a.events[i-1].event_time:
+                alarms_inside_gaps.append([id, "HA1", w, a.events[i-1].event_time, a.events[i].sont, (a.events[i].sont - a.events[i-1].event_time).total_seconds() / 3600., (w - a.events[i-1].event_time).total_seconds() / 3600.])
+    for w in a.ha2_alarms:
+        for i in range(1, len(a.events)):
+            if w < a.events[i].sont and w > a.events[i-1].event_time:
+                alarms_inside_gaps.append([id, "HA2", w, a.events[i-1].event_time, a.events[i].sont, (a.events[i].sont - a.events[i-1].event_time).total_seconds() / 3600., (w - a.events[i-1].event_time).total_seconds() / 3600.])
+alarms_inside_gaps.sort(key=lambda x: x[-1])
+
+with open("alarms_inside_event_gaps.csv", "w") as fh:
+    f = csv.writer(fh, delimiter=";")
+    f.writerow(["ID", "Alarmtyp (HA1/HA2)", "Alarmzeitpunkt", "Letztes Event", "Naechstes Event (SonT)", "Lueckengroesse [h]", "Zeitunterschied letztem Event und Alarm [h]"])
+    for alarm in reversed(alarms_inside_gaps):
+        f.writerow(alarm)
+
+# Delete alarms inside gaps from data
+for alarm in alarms_inside_gaps:
+    id = alarm[0]
+    w = alarm[2]
+    if alarm[-1] > 1:
+        if alarm[1] == "HA1":
+            animals[id].ha1_alarms.remove(w)
+        else:
+            animals[id].ha2_alarms.remove(w)
 
 #print("Events that do not obey order:") # There are none
 #for id in animals:
@@ -500,22 +521,27 @@ print("Average time between last HA1h and stage II (heifers) [h]: ", np.array(dt
 #        if a.events[i-1].event_time > a.events[i].sont:
 #            print(id, a.events[i-1].event_time, a.events[i].sont)
 
+all_gaps = []
 for thresh in [1,2,3]:
-    with open("./statistik_dude_2018-09-10/malte/confusion_table_" + str(thresh) + "h.csv", "w") as fh:
+    with open("./statistik_dude_2018-09-10/malte/confusion_table_" + str(thresh) + "h.csv", "w") as fh, open("./statistik_dude_2018-09-10/malte/confusion_table_" + str(thresh) + "h_ha1.csv", "w") as fh1, open("./statistik_dude_2018-09-10/malte/confusion_table_" + str(thresh) + "h_ha2.csv", "w") as fh2:
         f = csv.writer(fh, delimiter=";")
-        #f.writerow(["ID", "RN (HA1h)", "FN (HA1h)", "RP (HA1h)", "FP (HA1h)", "Sensitivitaet (HA1h)", "Spezifitaet (HA1h)", "PPV (HA1h)", "NPV (HA1h)", "RN (HA2h)", "FN (HA2h)", "RP (HA2h)", "FP (HA2h)", "Sensitivitaet (HA2h)", "Spezifitaet (HA2h)", "PPV (HA2h)", "NPV (HA2h)"])
+        f1 = csv.writer(fh1, delimiter=";")
+        f2 = csv.writer(fh2, delimiter=";")
         f.writerow(["ID", "RN", "FN", "RP", "FP", "Sensitivitaet", "Spezifitaet", "PPV", "NPV"])
+        f1.writerow(["ID", "RN", "FN", "RP", "FP", "Sensitivitaet", "Spezifitaet", "PPV", "NPV"])
+        f2.writerow(["ID", "RN", "FN", "RP", "FP", "Sensitivitaet", "Spezifitaet", "PPV", "NPV"])
 
         for id in animals:
             a = animals[id]
             if not a.calved:
                 continue
 
-            # Determine
             # Determine gaps between events
             gaps = []
             for i in range(1, len(a.events)):
                 gaps.append([a.events[i-1].event_time, a.events[i].sont])
+                if thresh == 1:
+                    all_gaps.append([id, (a.events[i].sont - a.events[i-1].event_time).total_seconds() / 3600.])
             assert len(gaps)+1 == len(a.events)
 
             # Calculate net time between alarm and rehousing/stage II
@@ -596,25 +622,66 @@ for thresh in [1,2,3]:
             f.writerow([id, RN, FN, RP, FP, se, sp, ppv, npv])
 
             # Individual
-            #FP1 = len([k for k in d_ha1 if k != 0])
-            #RP1 = 1 if 0 in d_ha1 else 0
-            #RN1 = nbins - 1 - FP1
-            #FN1 = 1 if 0 not in d_ha1 else 0
-            #assert RP1 + FN1 == 1
-            #se1 = RP1 / (RP1 + FN1)
-            #sp1 = RN1 / (RN1 + FP1)
-            #ppv1 = RP1 / (RP1 + FP1)
-            #npv1 = RN1 / (RN1 + FN1)
+            FP1 = len([k for k in d_ha1 if k != 0])
+            RP1 = 1 if 0 in d_ha1 else 0
+            RN1 = nbins - 1 - FP1
+            FN1 = 1 if 0 not in d_ha1 else 0
+            if RN1 == -1:
+                print("-1 for ha1")
+                print(d_ha1)
+                print(FP1)
+                raise
+            if RP1 + FN1 > 0:
+                se1 = RP1 / (RP1 + FN1)
+            else:
+                se1 = ""
+            if RN1 + FP1 > 0:
+                sp1 = RN1 / (RN1 + FP1)
+            else:
+                sp1 = ""
+            if RP1 + FP1 > 0:
+                ppv1 = RP1 / (RP1 + FP1)
+            else:
+                ppv1 = ""
+            if RN1 + FN1 > 0:
+                npv1 = RN1 / (RN1 + FN1)
+            else:
+                npv1 = ""
 
-            #FP2 = len([k for k in d_ha2 if k != 0])
-            #RP2 = 1 if 0 in d_ha2 else 0
-            #RN2 = nbins - 1 - FP2
-            #FN2 = 1 if 0 not in d_ha2 else 0
-            #assert RP2 + FN2 == 1
-            #se2 = RP2 / (RP2 + FN2)
-            #sp2 = RN2 / (RN2 + FP2)
-            #ppv2 = RP2 / (RP2 + FP2)
-            #npv2 = RN2 / (RN2 + FN2)
+            f1.writerow([id, RN1, FN1, RP1, FP1, se1, sp1, ppv1, npv1])
 
-            #f.writerow([id, RN1, FN1, RP1, FP1, se1, sp1, ppv1, npv1, RN2, FN2, RP2, FP2, se2, sp2, ppv2, npv2])
+            FP2 = len([k for k in d_ha2 if k != 0])
+            RP2 = 1 if 0 in d_ha2 else 0
+            RN2 = nbins - 1 - FP2
+            FN2 = 1 if 0 not in d_ha2 else 0
+            if RN2 == -1:
+                print("-1 for ha2")
+                print(d_ha2)
+                print(FP2)
+                raise
+            if RP2 + FN2 > 0:
+                se2 = RP2 / (RP2 + FN2)
+            else:
+                se2 = ""
+            if RN2 + FP2 > 0:
+                sp2 = RN2 / (RN2 + FP2)
+            else:
+                sp2 = ""
+            if RP2 + FP2 > 0:
+                ppv2 = RP2 / (RP2 + FP2)
+            else:
+                ppv2 = ""
+            if RN2 + FN2 > 0:
+                npv2 = RN2 / (RN2 + FN2)
+            else:
+                npv2 = ""
 
+            f2.writerow([id, RN2, FN2, RP2, FP2, se2, sp2, ppv2, npv2])
+
+# Look at maximum gaps and where they happen
+all_gaps.sort(key=lambda x: x[1])
+with open("event_gaps.csv", "w") as fh:
+    f = csv.writer(fh, delimiter=";")
+    f.writerow(["ID", "Lueckengroesse [h]"])
+    for gap in reversed(all_gaps):
+        f.writerow([gap[0], gap[1]])
