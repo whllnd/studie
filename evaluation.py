@@ -167,10 +167,6 @@ with open("Gummihalterung_vorher_nachher_erste_Events.csv", "w") as fh:
     for score in fev1:
         f.writerow([score, fev1[score], fev2[score], str(fev1[score] / ev1_dur).replace(".", ","), str(fev2[score] / ev2_dur).replace(".", ",")])
 
-# Delete certain animals
-for id in [2641, 1899, 3909, 1304]:
-    del animals[id]
-
 # Number of animals
 n_cows = sum([1 for id in animals if not animals[id].is_heifer])
 n_heif = sum([1 for id in animals if animals[id].is_heifer])
@@ -317,6 +313,13 @@ for id in animals:
             rp_calvings_cows += a.device_duration
             attachments_calvings_cows += len(a.events)
 
+# HERE WE DELETE ANIMALS DUE TO UNUSUAL HIGH ALARM RATES #######################
+for id in [2641, 1899, 3909, 1304]:
+    del animals[id]
+
+for id in animals:
+    a = animals[id]
+
     # Alarms
     if len(a.ha1_alarms) > 0:
         n_first_ha1 += 1
@@ -445,7 +448,7 @@ for score in first_events_total:
     print("\tCows:   ", first_events_cows[score], "(", first_events_cows[score] / n_cows, ")")
     print("\tHeifers:", first_events_heif[score], "(", first_events_heif[score] / n_heif, ")")
 
-print("\nTable 2: Event distribution for calvings only (114):")
+print("\nTable 2: Event distribution for calvings only (118):")
 print("----------------------------------------------------\n")
 print("Number of calvings:          ", n_calvings)
 print("Number of calvings (cows):   ", n_calvings_cows)
