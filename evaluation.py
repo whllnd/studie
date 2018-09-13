@@ -96,6 +96,78 @@ def load_data(fname):
 # Main #########################################################################
 
 animals = load_data("./Rohdaten_2018-09-05.csv")
+
+# Rubber pads
+switch = datetime.datetime(2017, 11, 3, hour=16)
+ev1 = {1:0,2:0,3:0,4:0,5:0,6:0,7:0,8:0,9:0}  # before switch
+ev1c = {1:0,2:0,3:0,4:0,5:0,6:0,7:0,8:0,9:0}
+ev1h = {1:0,2:0,3:0,4:0,5:0,6:0,7:0,8:0,9:0}
+ev2 = {1:0,2:0,3:0,4:0,5:0,6:0,7:0,8:0,9:0}  # after switch
+ev2c = {1:0,2:0,3:0,4:0,5:0,6:0,7:0,8:0,9:0}
+ev2h = {1:0,2:0,3:0,4:0,5:0,6:0,7:0,8:0,9:0}
+
+fev1 = {1:0,2:0,3:0,4:0,5:0,6:0,7:0,8:0,9:0}  # before switch
+fev1c = {1:0,2:0,3:0,4:0,5:0,6:0,7:0,8:0,9:0}
+fev1h = {1:0,2:0,3:0,4:0,5:0,6:0,7:0,8:0,9:0}
+fev2 = {1:0,2:0,3:0,4:0,5:0,6:0,7:0,8:0,9:0}  # after switch
+fev2c = {1:0,2:0,3:0,4:0,5:0,6:0,7:0,8:0,9:0}
+fev2h = {1:0,2:0,3:0,4:0,5:0,6:0,7:0,8:0,9:0}
+
+ev1_dur, ev2_dur = 0, 0
+score1 = 0
+for id in animals:
+    a = animals[id]
+
+    first_event = a.events[0]
+    if first_event.event_time <= switch:
+        fev1[first_event.score] += 1
+        if a.is_heifer:
+            fev1h[first_event.score] += 1
+        else:
+            fev1c[first_event.score] += 1
+    else:
+        fev2[first_event.score] += 1
+        if a.is_heifer:
+            fev2h[first_event.score] += 1
+        else:
+            fev2c[first_event.score] += 1
+
+    for e in a.events:
+        if e.score == 1:
+            score1 += 1
+        if e.event_time <= switch:
+            ev1[e.score] += 1
+            if a.is_heifer:
+                ev1h[e.score] += 1
+            else:
+                ev1c[e.score] += 1
+            ev1_dur += (e.event_time - e.sont).total_seconds() / 3600.
+        else:
+            ev2[e.score] += 1
+            if a.is_heifer:
+                ev2h[e.score] += 1
+            else:
+                ev2c[e.score] += 1
+            ev2_dur += (e.event_time - e.sont).total_seconds() / 3600.
+
+with open("Gummihalterung_vorher_nachher_alle_Events.csv", "w") as fh:
+    f = csv.writer(fh, delimiter=";")
+    f.writerow(["Event Score", "Anzahl zuvor", "Anzahl danach", "Anzahl pro Stunde", "Anzahl pro Stunde"])
+
+    for score in ev1:
+        f.writerow([score, ev1[score], ev2[score], str(ev1[score] / ev1_dur).replace(".", ","), str(ev2[score] / ev2_dur).replace(".", ",")])
+    f.writerow([""])
+    f.writerow(["Tragezeitraum vor Wechsel [h]:", str(ev1_dur).replace(".", ",")])
+    f.writerow(["Tragezeitraum nach Wechsel [h]:", str(ev2_dur).replace(".", ",")])
+
+with open("Gummihalterung_vorher_nachher_erste_Events.csv", "w") as fh:
+    f = csv.writer(fh, delimiter=";")
+    f.writerow(["Event Score", "Anzahl erster Events zuvor", "Anzahl erster Events danach", "Anzahl pro Stunde", "Anzahl pro Stunde"])
+
+    for score in fev1:
+        f.writerow([score, fev1[score], fev2[score], str(fev1[score] / ev1_dur).replace(".", ","), str(fev2[score] / ev2_dur).replace(".", ",")])
+
+# Delete certain animals
 for id in [2641, 1899, 3909, 1304]:
     del animals[id]
 
@@ -685,3 +757,4 @@ with open("event_gaps.csv", "w") as fh:
     f.writerow(["ID", "Lueckengroesse [h]"])
     for gap in reversed(all_gaps):
         f.writerow([gap[0], gap[1]])
+
