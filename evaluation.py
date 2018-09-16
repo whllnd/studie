@@ -315,6 +315,12 @@ for id in animals:
 
 # HERE WE DELETE ANIMALS DUE TO UNUSUAL HIGH ALARM RATES #######################
 for id in [2641, 1899, 3909, 1304]:
+    print("id:                  ", id)
+    print("absolute tragezeit:  ", (animals[id].events[-1].event_time - animals[id].events[0].sont).total_seconds() / 3600.)
+    print("bereinigte tragezeit:",animals[id].device_duration)
+    print("anzahl ha1:          ", len(animals[id].ha1_alarms))
+    print("anzahl ha2:          ", len(animals[id].ha2_alarms))
+    print("--")
     del animals[id]
 
 for id in animals:
