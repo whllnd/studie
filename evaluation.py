@@ -184,6 +184,11 @@ first_events_total = {1:0, 2:0, 3:0, 4:0, 5:0, 9:0}
 first_events_cows  = {1:0, 2:0, 3:0, 4:0, 5:0, 9:0}
 first_events_heif  = {1:0, 2:0, 3:0, 4:0, 5:0, 9:0}
 
+# Events after initial attachment
+first_events_with_calving = {1:0, 2:0, 3:0, 4:0, 5:0, 9:0}
+first_events_with_calving_cows  = {1:0, 2:0, 3:0, 4:0, 5:0, 9:0}
+first_events_with_calving_heif  = {1:0, 2:0, 3:0, 4:0, 5:0, 9:0}
+
 # Events for all animals
 events_total = {1:0, 2:0, 3:0, 4:0, 5:0, 9:0}
 events_cows  = {1:0, 2:0, 3:0, 4:0, 5:0, 9:0}
@@ -266,6 +271,12 @@ for id in animals:
         first_events_heif[a.events[0].score] += 1
     else:
         first_events_cows[a.events[0].score] += 1
+    if a.calved:
+        first_events_with_calving[a.events[0].score] += 1
+        if a.is_heifer:
+            first_events_with_calving_heif[a.events[0].score] += 1
+        else:
+            first_events_with_calving_cows[a.events[0].score] += 1
 
     # Events for animals
     for e in a.events:
@@ -313,6 +324,16 @@ for id in animals:
             rp_calvings_cows += a.device_duration
             attachments_calvings_cows += len(a.events)
 
+with open("Erste_Events_fuer_kalbende_Tiere.csv", "w") as fh:
+    f = csv.writer(fh, delimiter=";")
+    f.writerow(["Kuh ID", "Kuh / Faerse", "Event Score", "Event Zeitpunkt"])
+    for id in animals:
+        a = animals[id]
+        if not a.calved:
+            continue
+
+first_events_with_calving
+
 # HERE WE DELETE ANIMALS DUE TO UNUSUAL HIGH ALARM RATES #######################
 for id in [2641, 1899, 3909, 1304]:
     print("id:                  ", id)
@@ -320,6 +341,8 @@ for id in [2641, 1899, 3909, 1304]:
     print("bereinigte tragezeit:",animals[id].device_duration)
     print("anzahl ha1:          ", len(animals[id].ha1_alarms))
     print("anzahl ha2:          ", len(animals[id].ha2_alarms))
+    if animals[id].calved:
+        print("hat gekalbt!")
     print("--")
     del animals[id]
 
@@ -419,6 +442,13 @@ for id in animals:
                 dt_last_ha2_stageII_cows.append(min_dt)
 
 
+avg_device_time = np.array([animals[id].device_duration for id in animals])
+avg_device_time_cows = np.array([animals[id].device_duration for id in animals if not animals[id].is_heifer])
+avg_device_time_heif = np.array([animals[id].device_duration for id in animals if animals[id].is_heifer])
+
+avg_device_time_with_calving = np.array([animals[id].device_duration for id in animals if animals[id].calved])
+avg_device_time_with_calving_cows = np.array([animals[id].device_duration for id in animals if not animals[id].is_heifer and animals[id].calved])
+avg_device_time_with_calving_heif = np.array([animals[id].device_duration for id in animals if animals[id].is_heifer and animals[id].calved])
 
 print("\nBasic statistics:")
 print("---------------------------------------\n")
@@ -430,13 +460,13 @@ print("Number of calvings:          ", n_calvings)
 print("Number of calvings (cows):   ", n_calvings)
 print("Number of calvings (heifers):", n_calvings)
 print("")
-print("Average device carrying time [h]:          ", np.array([animals[id].device_duration for id in animals]).mean())
-print("Average device carrying time (cows) [h]:   ", np.array([animals[id].device_duration for id in animals if not animals[id].is_heifer]).mean())
-print("Average device carrying time (heifers) [h]:", np.array([animals[id].device_duration for id in animals if animals[id].is_heifer]).mean())
+print("Average device carrying time [h]:          ", avg_device_time.mean(), avg_device_time.std())
+print("Average device carrying time (cows) [h]:   ", avg_device_time_cows.mean(), avg_device_time_cows.std())
+print("Average device carrying time (heifers) [h]:", avg_device_time_heif.mean(), avg_device_time_heif.std())
 print("")
-print("Average device carrying time when calving [h]:          ", np.array([animals[id].device_duration for id in animals if animals[id].calved]).mean())
-print("Average device carrying time when calving (cows) [h]:   ", np.array([animals[id].device_duration for id in animals if not animals[id].is_heifer and animals[id].calved]).mean())
-print("Average device carrying time when calving (heifers) [h]:", np.array([animals[id].device_duration for id in animals if animals[id].is_heifer and animals[id].calved]).mean())
+print("Average device carrying time when calving [h]:          ", avg_device_time_with_calving.mean(), avg_device_time_with_calving.std())
+print("Average device carrying time when calving (cows) [h]:   ", avg_device_time_with_calving_cows.mean(), avg_device_time_with_calving_cows.std())
+print("Average device carrying time when calving (heifers) [h]:", avg_device_time_with_calving_heif.mean(), avg_device_time_with_calving_heif.std())
 print("")
 print("Average time between stage II and birth [h]:          ", np.array(dt_stageII_birth).mean())
 print("Average time between stage II and birth (cows) [h]:   ", np.array(dt_stageII_birth_cows).mean())
@@ -513,6 +543,17 @@ for score in first_events_total:
     print("\tTotal:  ", events_total[score] / attachments)
     print("\tCows:   ", events_cows[score] / attachments_cows)
     print("\tHeifers:", events_heif[score] / attachments_heif)
+
+print("\nFirst events for calving animals:")
+print("---------------------------------\n")
+print("Animals that calved:", n_calvings)
+print("Cows that calved:   ", n_calvings_cows)
+print("Heifers that calved:", n_calvings_heif)
+for score in first_events_with_calving:
+    print("Event", score)
+    print("\tTotal:  ", first_events_with_calving[score])
+    print("\tCows:   ", first_events_with_calving_cows[score])
+    print("\tHeifers:", first_events_with_calving_heif[score])
 
 print("\nAlarm sensitivity (according to statistics meeting) for all animals (180):")
 print("--------------------------------------------------------------------------\n")
@@ -767,3 +808,12 @@ with open("event_gaps.csv", "w") as fh:
     for gap in reversed(all_gaps):
         f.writerow([gap[0], gap[1]])
 
+# What happened to those animals that did not calve?
+with open("Letzte_Events_fuer_nicht_kalbende_Tiere.csv", "w") as fh:
+    f = csv.writer(fh, delimiter=";")
+    f.writerow(["Kuh ID", "Event Score", "Eventzeitpunkt"])
+    for id in animals:
+        a = animals[id]
+        if a.calved:
+            continue
+        f.writerow([id, a.events[-1].score, a.events[-1].event_time])
