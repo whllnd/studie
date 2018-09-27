@@ -332,7 +332,13 @@ with open("Erste_Events_fuer_kalbende_Tiere.csv", "w") as fh:
         if not a.calved:
             continue
 
-first_events_with_calving
+avg_device_time = np.array([animals[id].device_duration for id in animals])
+avg_device_time_cows = np.array([animals[id].device_duration for id in animals if not animals[id].is_heifer])
+avg_device_time_heif = np.array([animals[id].device_duration for id in animals if animals[id].is_heifer])
+
+avg_device_time_with_calving = np.array([animals[id].device_duration for id in animals if animals[id].calved])
+avg_device_time_with_calving_cows = np.array([animals[id].device_duration for id in animals if not animals[id].is_heifer and animals[id].calved])
+avg_device_time_with_calving_heif = np.array([animals[id].device_duration for id in animals if animals[id].is_heifer and animals[id].calved])
 
 # HERE WE DELETE ANIMALS DUE TO UNUSUAL HIGH ALARM RATES #######################
 for id in [2641, 1899, 3909, 1304]:
@@ -441,14 +447,6 @@ for id in animals:
                 dt_first_ha2_stageII_cows.append(max_dt)
                 dt_last_ha2_stageII_cows.append(min_dt)
 
-
-avg_device_time = np.array([animals[id].device_duration for id in animals])
-avg_device_time_cows = np.array([animals[id].device_duration for id in animals if not animals[id].is_heifer])
-avg_device_time_heif = np.array([animals[id].device_duration for id in animals if animals[id].is_heifer])
-
-avg_device_time_with_calving = np.array([animals[id].device_duration for id in animals if animals[id].calved])
-avg_device_time_with_calving_cows = np.array([animals[id].device_duration for id in animals if not animals[id].is_heifer and animals[id].calved])
-avg_device_time_with_calving_heif = np.array([animals[id].device_duration for id in animals if animals[id].is_heifer and animals[id].calved])
 
 print("\nBasic statistics:")
 print("---------------------------------------\n")
