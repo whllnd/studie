@@ -370,7 +370,7 @@ with open("Moocall_Scores_180_Tiere.csv", "w") as fh:
             continue
         f.writerow([k, moocall_score_total[k], moocall_score_cows[k], moocall_score_heif[k]])
     f.writerow([])
-    f.writerow(["Ohne Score:", moocall_score_total[-1]])
+    f.writerow(["Ohne Score:", moocall_score_total[-1], moocall_score_cows[-1], moocall_score_heif[-1]])
 
 with open("Moocall_Scores_118_Tiere.csv", "w") as fh:
     f = csv.writer(fh, delimiter=";")
@@ -380,7 +380,7 @@ with open("Moocall_Scores_118_Tiere.csv", "w") as fh:
             continue
         f.writerow([k, moocall_score_calvings_total[k], moocall_score_calvings_cows[k], moocall_score_calvings_heif[k]])
     f.writerow([])
-    f.writerow(["Ohne Score:", moocall_score_calvings_total[-1]])
+    f.writerow(["Ohne Score:", moocall_score_calvings_total[-1], moocall_score_calvings_cows[-1], moocall_score_calvings_heif[-1]])
 
 avg_device_time = np.array([animals[id].device_duration for id in animals])
 avg_device_time_cows = np.array([animals[id].device_duration for id in animals if not animals[id].is_heifer])
