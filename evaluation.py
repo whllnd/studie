@@ -204,6 +204,15 @@ events_hist_total = {1:[], 2:[], 3:[], 4:[], 5:[], 9:[]}
 events_hist_cows  = {1:[], 2:[], 3:[], 4:[], 5:[], 9:[]}
 events_hist_heif  = {1:[], 2:[], 3:[], 4:[], 5:[], 9:[]}
 
+# Moocall scores
+moocall_score_total = {-1:0, 0:0, 1:0, 2:0, 3:0, 4:0} # -1 is an empty entry
+moocall_score_cows  = {-1:0, 0:0, 1:0, 2:0, 3:0, 4:0}
+moocall_score_heif  = {-1:0, 0:0, 1:0, 2:0, 3:0, 4:0}
+
+moocall_score_calvings_total = {-1:0, 0:0, 1:0, 2:0, 3:0, 4:0}
+moocall_score_calvings_cows  = {-1:0, 0:0, 1:0, 2:0, 3:0, 4:0}
+moocall_score_calvings_heif  = {-1:0, 0:0, 1:0, 2:0, 3:0, 4:0}
+
 # Number of Risk Periods [h]
 rp = 0
 rp_cows = 0
@@ -305,6 +314,27 @@ for id in animals:
             else:
                 events_hist_cows[e.score].append(dt)
 
+    # Moocall scores
+    for e in a.events:
+        if e.moocall_score is None:
+            moocall_score_misses += 1
+            moocall_score_total[-1] += 1
+            if a.calved:
+                moocall_score_calvings_total[-1] += 1
+            continue
+        moocall_score_total[e.moocall_score] += 1
+        if a.is_heifer:
+            moocall_score_heif[e.moocall_score] += 1
+        else:
+            moocall_score_cows[e.moocall_score] += 1
+
+        if a.calved:
+            moocall_score_calvings_total[e.moocall_score] += 1
+            if a.is_heifer:
+                moocall_score_calvings_heif[e.moocall_score] += 1
+            else:
+                moocall_score_calvings_cows[e.moocall_score] += 1
+
     # Risk periods and number of attachments
     rp += a.device_duration
     attachments += len(a.events)
@@ -331,6 +361,26 @@ with open("Erste_Events_fuer_kalbende_Tiere.csv", "w") as fh:
         a = animals[id]
         if not a.calved:
             continue
+
+with open("Moocall_Scores_180_Tiere.csv", "w") as fh:
+    f = csv.writer(fh, delimiter=";")
+    f.writerow(["Moocall Score", "Anzahl total", "Anzahl Kuehe", "Anzahl Faersen"])
+    for k in moocall_score_total:
+        if -1 == k:
+            continue
+        f.writerow([k, moocall_score_total[k], moocall_score_cows[k], moocall_score_heif[k]])
+    f.writerow([])
+    f.writerow(["Ohne Score:", moocall_score_total[-1]])
+
+with open("Moocall_Scores_118_Tiere.csv", "w") as fh:
+    f = csv.writer(fh, delimiter=";")
+    f.writerow(["Moocall Score", "Anzahl total", "Anzahl Kuehe", "Anzahl Faersen"])
+    for k in moocall_score_calvings_total:
+        if -1 == k:
+            continue
+        f.writerow([k, moocall_score_calvings_total[k], moocall_score_calvings_cows[k], moocall_score_calvings_heif[k]])
+    f.writerow([])
+    f.writerow(["Ohne Score:", moocall_score_calvings_total[-1]])
 
 avg_device_time = np.array([animals[id].device_duration for id in animals])
 avg_device_time_cows = np.array([animals[id].device_duration for id in animals if not animals[id].is_heifer])
