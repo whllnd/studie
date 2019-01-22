@@ -1,0 +1,2244 @@
+[1] "./2018-10-01_python_faersen/confusion_table_1h.csv"
+[1] "Zeitraum: 1 Alarm: "
+          Outcome +    Outcome -      Total
+Test +           12           81         93
+Test -           11         1207       1218
+Total            23         1288       1311
+
+Point estimates and 95 % CIs:
+---------------------------------------------------------
+Apparent prevalence                    0.07 (0.06, 0.09)
+True prevalence                        0.02 (0.01, 0.03)
+Sensitivity                            0.52 (0.31, 0.73)
+Specificity                            0.94 (0.92, 0.95)
+Positive predictive value              0.13 (0.07, 0.21)
+Negative predictive value              0.99 (0.98, 1.00)
+Positive likelihood ratio              8.30 (5.32, 12.94)
+Negative likelihood ratio              0.51 (0.33, 0.78)
+---------------------------------------------------------
+Confusion Matrix and Statistics
+
+     A    B
+A   12   81
+B   11 1207
+                                          
+               Accuracy : 0.9298          
+                 95% CI : (0.9146, 0.9431)
+    No Information Rate : 0.9825          
+    P-Value [Acc > NIR] : 1               
+                                          
+                  Kappa : 0.1839          
+ Mcnemar's Test P-Value : 6.304e-13       
+                                          
+            Sensitivity : 0.521739        
+            Specificity : 0.937112        
+         Pos Pred Value : 0.129032        
+         Neg Pred Value : 0.990969        
+             Prevalence : 0.017544        
+         Detection Rate : 0.009153        
+   Detection Prevalence : 0.070938        
+      Balanced Accuracy : 0.729425        
+                                          
+       'Positive' Class : A               
+                                          
+[1] "Youden-Score: 0.453591382304809"
+[1] "./2018-10-01_python_faersen/confusion_table_1h_ha1.csv"
+[1] "Zeitraum: 1 Alarm: _ha1"
+          Outcome +    Outcome -      Total
+Test +            5           54         59
+Test -           18         1234       1252
+Total            23         1288       1311
+
+Point estimates and 95 % CIs:
+---------------------------------------------------------
+Apparent prevalence                    0.05 (0.03, 0.06)
+True prevalence                        0.02 (0.01, 0.03)
+Sensitivity                            0.22 (0.07, 0.44)
+Specificity                            0.96 (0.95, 0.97)
+Positive predictive value              0.08 (0.03, 0.19)
+Negative predictive value              0.99 (0.98, 0.99)
+Positive likelihood ratio              5.19 (2.29, 11.75)
+Negative likelihood ratio              0.82 (0.66, 1.01)
+---------------------------------------------------------
+Confusion Matrix and Statistics
+
+     A    B
+A    5   54
+B   18 1234
+                                          
+               Accuracy : 0.9451          
+                 95% CI : (0.9313, 0.9568)
+    No Information Rate : 0.9825          
+    P-Value [Acc > NIR] : 1               
+                                          
+                  Kappa : 0.0992          
+ Mcnemar's Test P-Value : 3.711e-05       
+                                          
+            Sensitivity : 0.217391        
+            Specificity : 0.958075        
+         Pos Pred Value : 0.084746        
+         Neg Pred Value : 0.985623        
+             Prevalence : 0.017544        
+         Detection Rate : 0.003814        
+   Detection Prevalence : 0.045004        
+      Balanced Accuracy : 0.587733        
+                                          
+       'Positive' Class : A               
+                                          
+[1] "Youden-Score: 0.17074818944829"
+[1] "./2018-10-01_python_faersen/confusion_table_1h_ha2.csv"
+[1] "Zeitraum: 1 Alarm: _ha2"
+          Outcome +    Outcome -      Total
+Test +            7           29         36
+Test -           16         1259       1275
+Total            23         1288       1311
+
+Point estimates and 95 % CIs:
+---------------------------------------------------------
+Apparent prevalence                    0.03 (0.02, 0.04)
+True prevalence                        0.02 (0.01, 0.03)
+Sensitivity                            0.30 (0.13, 0.53)
+Specificity                            0.98 (0.97, 0.98)
+Positive predictive value              0.19 (0.08, 0.36)
+Negative predictive value              0.99 (0.98, 0.99)
+Positive likelihood ratio              13.52 (6.61, 27.63)
+Negative likelihood ratio              0.71 (0.54, 0.93)
+---------------------------------------------------------
+Confusion Matrix and Statistics
+
+     A    B
+A    7   29
+B   16 1259
+                                          
+               Accuracy : 0.9657          
+                 95% CI : (0.9543, 0.9749)
+    No Information Rate : 0.9825          
+    P-Value [Acc > NIR] : 0.99999         
+                                          
+                  Kappa : 0.2206          
+ Mcnemar's Test P-Value : 0.07364         
+                                          
+            Sensitivity : 0.304348        
+            Specificity : 0.977484        
+         Pos Pred Value : 0.194444        
+         Neg Pred Value : 0.987451        
+             Prevalence : 0.017544        
+         Detection Rate : 0.005339        
+   Detection Prevalence : 0.027460        
+      Balanced Accuracy : 0.640916        
+                                          
+       'Positive' Class : A               
+                                          
+[1] "Youden-Score: 0.281430149378258"
+[1] "./2018-10-01_python_faersen/confusion_table_2h.csv"
+[1] "Zeitraum: 2 Alarm: "
+          Outcome +    Outcome -      Total
+Test +           15           59         74
+Test -            8          579        587
+Total            23          638        661
+
+Point estimates and 95 % CIs:
+---------------------------------------------------------
+Apparent prevalence                    0.11 (0.09, 0.14)
+True prevalence                        0.03 (0.02, 0.05)
+Sensitivity                            0.65 (0.43, 0.84)
+Specificity                            0.91 (0.88, 0.93)
+Positive predictive value              0.20 (0.12, 0.31)
+Negative predictive value              0.99 (0.97, 0.99)
+Positive likelihood ratio              7.05 (4.80, 10.36)
+Negative likelihood ratio              0.38 (0.22, 0.67)
+---------------------------------------------------------
+Confusion Matrix and Statistics
+
+    A   B
+A  15  59
+B   8 579
+                                          
+               Accuracy : 0.8986          
+                 95% CI : (0.8731, 0.9206)
+    No Information Rate : 0.9652          
+    P-Value [Acc > NIR] : 1               
+                                          
+                  Kappa : 0.2706          
+ Mcnemar's Test P-Value : 1.006e-09       
+                                          
+            Sensitivity : 0.65217         
+            Specificity : 0.90752         
+         Pos Pred Value : 0.20270         
+         Neg Pred Value : 0.98637         
+             Prevalence : 0.03480         
+         Detection Rate : 0.02269         
+   Detection Prevalence : 0.11195         
+      Balanced Accuracy : 0.77985         
+                                          
+       'Positive' Class : A               
+                                          
+[1] "Youden-Score: 0.55391378087331"
+[1] "./2018-10-01_python_faersen/confusion_table_2h_ha1.csv"
+[1] "Zeitraum: 2 Alarm: _ha1"
+          Outcome +    Outcome -      Total
+Test +           13           46         59
+Test -           10          592        602
+Total            23          638        661
+
+Point estimates and 95 % CIs:
+---------------------------------------------------------
+Apparent prevalence                    0.09 (0.07, 0.11)
+True prevalence                        0.03 (0.02, 0.05)
+Sensitivity                            0.57 (0.34, 0.77)
+Specificity                            0.93 (0.90, 0.95)
+Positive predictive value              0.22 (0.12, 0.35)
+Negative predictive value              0.98 (0.97, 0.99)
+Positive likelihood ratio              7.84 (4.98, 12.34)
+Negative likelihood ratio              0.47 (0.29, 0.75)
+---------------------------------------------------------
+Confusion Matrix and Statistics
+
+    A   B
+A  13  46
+B  10 592
+                                          
+               Accuracy : 0.9153          
+                 95% CI : (0.8914, 0.9354)
+    No Information Rate : 0.9652          
+    P-Value [Acc > NIR] : 1               
+                                          
+                  Kappa : 0.2811          
+ Mcnemar's Test P-Value : 2.91e-06        
+                                          
+            Sensitivity : 0.56522         
+            Specificity : 0.92790         
+         Pos Pred Value : 0.22034         
+         Neg Pred Value : 0.98339         
+             Prevalence : 0.03480         
+         Detection Rate : 0.01967         
+   Detection Prevalence : 0.08926         
+      Balanced Accuracy : 0.74656         
+                                          
+       'Positive' Class : A               
+                                          
+[1] "Youden-Score: 0.487984688853536"
+[1] "./2018-10-01_python_faersen/confusion_table_2h_ha2.csv"
+[1] "Zeitraum: 2 Alarm: _ha2"
+          Outcome +    Outcome -      Total
+Test +           10           26         36
+Test -           13          612        625
+Total            23          638        661
+
+Point estimates and 95 % CIs:
+---------------------------------------------------------
+Apparent prevalence                    0.05 (0.04, 0.07)
+True prevalence                        0.03 (0.02, 0.05)
+Sensitivity                            0.43 (0.23, 0.66)
+Specificity                            0.96 (0.94, 0.97)
+Positive predictive value              0.28 (0.14, 0.45)
+Negative predictive value              0.98 (0.96, 0.99)
+Positive likelihood ratio              10.67 (5.86, 19.42)
+Negative likelihood ratio              0.59 (0.41, 0.84)
+---------------------------------------------------------
+Confusion Matrix and Statistics
+
+    A   B
+A  10  26
+B  13 612
+                                          
+               Accuracy : 0.941           
+                 95% CI : (0.9202, 0.9577)
+    No Information Rate : 0.9652          
+    P-Value [Acc > NIR] : 0.99935         
+                                          
+                  Kappa : 0.3097          
+ Mcnemar's Test P-Value : 0.05466         
+                                          
+            Sensitivity : 0.43478         
+            Specificity : 0.95925         
+         Pos Pred Value : 0.27778         
+         Neg Pred Value : 0.97920         
+             Prevalence : 0.03480         
+         Detection Rate : 0.01513         
+   Detection Prevalence : 0.05446         
+      Balanced Accuracy : 0.69702         
+                                          
+       'Positive' Class : A               
+                                          
+[1] "Youden-Score: 0.39014483237151"
+[1] "./2018-10-01_python_faersen/confusion_table_3h.csv"
+[1] "Zeitraum: 3 Alarm: "
+          Outcome +    Outcome -      Total
+Test +           16           52         68
+Test -            7          370        377
+Total            23          422        445
+
+Point estimates and 95 % CIs:
+---------------------------------------------------------
+Apparent prevalence                    0.15 (0.12, 0.19)
+True prevalence                        0.05 (0.03, 0.08)
+Sensitivity                            0.70 (0.47, 0.87)
+Specificity                            0.88 (0.84, 0.91)
+Positive predictive value              0.24 (0.14, 0.35)
+Negative predictive value              0.98 (0.96, 0.99)
+Positive likelihood ratio              5.65 (3.89, 8.18)
+Negative likelihood ratio              0.35 (0.19, 0.64)
+---------------------------------------------------------
+Confusion Matrix and Statistics
+
+    A   B
+A  16  52
+B   7 370
+                                          
+               Accuracy : 0.8674          
+                 95% CI : (0.8323, 0.8975)
+    No Information Rate : 0.9483          
+    P-Value [Acc > NIR] : 1               
+                                          
+                  Kappa : 0.2974          
+ Mcnemar's Test P-Value : 1.014e-08       
+                                          
+            Sensitivity : 0.69565         
+            Specificity : 0.87678         
+         Pos Pred Value : 0.23529         
+         Neg Pred Value : 0.98143         
+             Prevalence : 0.05169         
+         Detection Rate : 0.03596         
+   Detection Prevalence : 0.15281         
+      Balanced Accuracy : 0.78621         
+                                          
+       'Positive' Class : A               
+                                          
+[1] "Youden-Score: 0.567498732335438"
+[1] "./2018-10-01_python_faersen/confusion_table_3h_ha1.csv"
+[1] "Zeitraum: 3 Alarm: _ha1"
+          Outcome +    Outcome -      Total
+Test +           16           42         58
+Test -            7          380        387
+Total            23          422        445
+
+Point estimates and 95 % CIs:
+---------------------------------------------------------
+Apparent prevalence                    0.13 (0.10, 0.17)
+True prevalence                        0.05 (0.03, 0.08)
+Sensitivity                            0.70 (0.47, 0.87)
+Specificity                            0.90 (0.87, 0.93)
+Positive predictive value              0.28 (0.17, 0.41)
+Negative predictive value              0.98 (0.96, 0.99)
+Positive likelihood ratio              6.99 (4.71, 10.37)
+Negative likelihood ratio              0.34 (0.18, 0.63)
+---------------------------------------------------------
+Confusion Matrix and Statistics
+
+    A   B
+A  16  42
+B   7 380
+                                         
+               Accuracy : 0.8899         
+                 95% CI : (0.857, 0.9174)
+    No Information Rate : 0.9483         
+    P-Value [Acc > NIR] : 1              
+                                         
+                  Kappa : 0.3467         
+ Mcnemar's Test P-Value : 1.191e-06      
+                                         
+            Sensitivity : 0.69565        
+            Specificity : 0.90047        
+         Pos Pred Value : 0.27586        
+         Neg Pred Value : 0.98191        
+             Prevalence : 0.05169        
+         Detection Rate : 0.03596        
+   Detection Prevalence : 0.13034        
+      Balanced Accuracy : 0.79806        
+                                         
+       'Positive' Class : A              
+                                         
+[1] "Youden-Score: 0.58751178806278"
+[1] "./2018-10-01_python_faersen/confusion_table_3h_ha2.csv"
+[1] "Zeitraum: 3 Alarm: _ha2"
+          Outcome +    Outcome -      Total
+Test +           10           26         36
+Test -           13          396        409
+Total            23          422        445
+
+Point estimates and 95 % CIs:
+---------------------------------------------------------
+Apparent prevalence                    0.08 (0.06, 0.11)
+True prevalence                        0.05 (0.03, 0.08)
+Sensitivity                            0.43 (0.23, 0.66)
+Specificity                            0.94 (0.91, 0.96)
+Positive predictive value              0.28 (0.14, 0.45)
+Negative predictive value              0.97 (0.95, 0.98)
+Positive likelihood ratio              7.06 (3.89, 12.81)
+Negative likelihood ratio              0.60 (0.42, 0.86)
+---------------------------------------------------------
+Confusion Matrix and Statistics
+
+    A   B
+A  10  26
+B  13 396
+                                          
+               Accuracy : 0.9124          
+                 95% CI : (0.8821, 0.9369)
+    No Information Rate : 0.9483          
+    P-Value [Acc > NIR] : 0.99942         
+                                          
+                  Kappa : 0.2945          
+ Mcnemar's Test P-Value : 0.05466         
+                                          
+            Sensitivity : 0.43478         
+            Specificity : 0.93839         
+         Pos Pred Value : 0.27778         
+         Neg Pred Value : 0.96822         
+             Prevalence : 0.05169         
+         Detection Rate : 0.02247         
+   Detection Prevalence : 0.08090         
+      Balanced Accuracy : 0.68659         
+                                          
+       'Positive' Class : A               
+                                          
+[1] "Youden-Score: 0.362754313538225"
+[1] "./2018-10-01_python_faersen/confusion_table_4h.csv"
+[1] "Zeitraum: 4 Alarm: "
+          Outcome +    Outcome -      Total
+Test +           17           45         62
+Test -            6          266        272
+Total            23          311        334
+
+Point estimates and 95 % CIs:
+---------------------------------------------------------
+Apparent prevalence                    0.19 (0.15, 0.23)
+True prevalence                        0.07 (0.04, 0.10)
+Sensitivity                            0.74 (0.52, 0.90)
+Specificity                            0.86 (0.81, 0.89)
+Positive predictive value              0.27 (0.17, 0.40)
+Negative predictive value              0.98 (0.95, 0.99)
+Positive likelihood ratio              5.11 (3.55, 7.35)
+Negative likelihood ratio              0.31 (0.15, 0.61)
+---------------------------------------------------------
+Confusion Matrix and Statistics
+
+    A   B
+A  17  45
+B   6 266
+                                          
+               Accuracy : 0.8473          
+                 95% CI : (0.8042, 0.8841)
+    No Information Rate : 0.9311          
+    P-Value [Acc > NIR] : 1               
+                                          
+                  Kappa : 0.333           
+ Mcnemar's Test P-Value : 1.032e-07       
+                                          
+            Sensitivity : 0.73913         
+            Specificity : 0.85531         
+         Pos Pred Value : 0.27419         
+         Neg Pred Value : 0.97794         
+             Prevalence : 0.06886         
+         Detection Rate : 0.05090         
+   Detection Prevalence : 0.18563         
+      Balanced Accuracy : 0.79722         
+                                          
+       'Positive' Class : A               
+                                          
+[1] "Youden-Score: 0.583354489060701"
+[1] "./2018-10-01_python_faersen/confusion_table_4h_ha1.csv"
+[1] "Zeitraum: 4 Alarm: _ha1"
+          Outcome +    Outcome -      Total
+Test +           16           40         56
+Test -            7          271        278
+Total            23          311        334
+
+Point estimates and 95 % CIs:
+---------------------------------------------------------
+Apparent prevalence                    0.17 (0.13, 0.21)
+True prevalence                        0.07 (0.04, 0.10)
+Sensitivity                            0.70 (0.47, 0.87)
+Specificity                            0.87 (0.83, 0.91)
+Positive predictive value              0.29 (0.17, 0.42)
+Negative predictive value              0.97 (0.95, 0.99)
+Positive likelihood ratio              5.41 (3.64, 8.04)
+Negative likelihood ratio              0.35 (0.19, 0.65)
+---------------------------------------------------------
+Confusion Matrix and Statistics
+
+    A   B
+A  16  40
+B   7 271
+                                          
+               Accuracy : 0.8593          
+                 95% CI : (0.8173, 0.8947)
+    No Information Rate : 0.9311          
+    P-Value [Acc > NIR] : 1               
+                                          
+                  Kappa : 0.3407          
+ Mcnemar's Test P-Value : 3.046e-06       
+                                          
+            Sensitivity : 0.69565         
+            Specificity : 0.87138         
+         Pos Pred Value : 0.28571         
+         Neg Pred Value : 0.97482         
+             Prevalence : 0.06886         
+         Detection Rate : 0.04790         
+   Detection Prevalence : 0.16766         
+      Balanced Accuracy : 0.78352         
+                                          
+       'Positive' Class : A               
+                                          
+[1] "Youden-Score: 0.545879812420527"
+[1] "./2018-10-01_python_faersen/confusion_table_4h_ha2.csv"
+[1] "Zeitraum: 4 Alarm: _ha2"
+          Outcome +    Outcome -      Total
+Test +           12           24         36
+Test -           11          287        298
+Total            23          311        334
+
+Point estimates and 95 % CIs:
+---------------------------------------------------------
+Apparent prevalence                    0.11 (0.08, 0.15)
+True prevalence                        0.07 (0.04, 0.10)
+Sensitivity                            0.52 (0.31, 0.73)
+Specificity                            0.92 (0.89, 0.95)
+Positive predictive value              0.33 (0.19, 0.51)
+Negative predictive value              0.96 (0.93, 0.98)
+Positive likelihood ratio              6.76 (3.91, 11.70)
+Negative likelihood ratio              0.52 (0.34, 0.80)
+---------------------------------------------------------
+Confusion Matrix and Statistics
+
+    A   B
+A  12  24
+B  11 287
+                                          
+               Accuracy : 0.8952          
+                 95% CI : (0.8573, 0.9259)
+    No Information Rate : 0.9311          
+    P-Value [Acc > NIR] : 0.99451         
+                                          
+                  Kappa : 0.3524          
+ Mcnemar's Test P-Value : 0.04252         
+                                          
+            Sensitivity : 0.52174         
+            Specificity : 0.92283         
+         Pos Pred Value : 0.33333         
+         Neg Pred Value : 0.96309         
+             Prevalence : 0.06886         
+         Detection Rate : 0.03593         
+   Detection Prevalence : 0.10778         
+      Balanced Accuracy : 0.72228         
+                                          
+       'Positive' Class : A               
+                                          
+[1] "Youden-Score: 0.430874113709688"
+[1] "./2018-10-01_python_faersen/confusion_table_5h.csv"
+[1] "Zeitraum: 5 Alarm: "
+          Outcome +    Outcome -      Total
+Test +           17           43         60
+Test -            6          206        212
+Total            23          249        272
+
+Point estimates and 95 % CIs:
+---------------------------------------------------------
+Apparent prevalence                    0.22 (0.17, 0.27)
+True prevalence                        0.08 (0.05, 0.12)
+Sensitivity                            0.74 (0.52, 0.90)
+Specificity                            0.83 (0.77, 0.87)
+Positive predictive value              0.28 (0.17, 0.41)
+Negative predictive value              0.97 (0.94, 0.99)
+Positive likelihood ratio              4.28 (2.97, 6.16)
+Negative likelihood ratio              0.32 (0.16, 0.63)
+---------------------------------------------------------
+Confusion Matrix and Statistics
+
+    A   B
+A  17  43
+B   6 206
+                                          
+               Accuracy : 0.8199          
+                 95% CI : (0.7689, 0.8637)
+    No Information Rate : 0.9154          
+    P-Value [Acc > NIR] : 1               
+                                          
+                  Kappa : 0.3274          
+ Mcnemar's Test P-Value : 2.706e-07       
+                                          
+            Sensitivity : 0.73913         
+            Specificity : 0.82731         
+         Pos Pred Value : 0.28333         
+         Neg Pred Value : 0.97170         
+             Prevalence : 0.08456         
+         Detection Rate : 0.06250         
+   Detection Prevalence : 0.22059         
+      Balanced Accuracy : 0.78322         
+                                          
+       'Positive' Class : A               
+                                          
+[1] "Youden-Score: 0.554994606678757"
+[1] "./2018-10-01_python_faersen/confusion_table_5h_ha1.csv"
+[1] "Zeitraum: 5 Alarm: _ha1"
+          Outcome +    Outcome -      Total
+Test +           17           38         55
+Test -            6          211        217
+Total            23          249        272
+
+Point estimates and 95 % CIs:
+---------------------------------------------------------
+Apparent prevalence                    0.20 (0.16, 0.25)
+True prevalence                        0.08 (0.05, 0.12)
+Sensitivity                            0.74 (0.52, 0.90)
+Specificity                            0.85 (0.80, 0.89)
+Positive predictive value              0.31 (0.19, 0.45)
+Negative predictive value              0.97 (0.94, 0.99)
+Positive likelihood ratio              4.84 (3.31, 7.08)
+Negative likelihood ratio              0.31 (0.15, 0.61)
+---------------------------------------------------------
+Confusion Matrix and Statistics
+
+    A   B
+A  17  38
+B   6 211
+                                         
+               Accuracy : 0.8382         
+                 95% CI : (0.789, 0.8799)
+    No Information Rate : 0.9154         
+    P-Value [Acc > NIR] : 1              
+                                         
+                  Kappa : 0.3595         
+ Mcnemar's Test P-Value : 2.962e-06      
+                                         
+            Sensitivity : 0.73913        
+            Specificity : 0.84739        
+         Pos Pred Value : 0.30909        
+         Neg Pred Value : 0.97235        
+             Prevalence : 0.08456        
+         Detection Rate : 0.06250        
+   Detection Prevalence : 0.20221        
+      Balanced Accuracy : 0.79326        
+                                         
+       'Positive' Class : A              
+                                         
+[1] "Youden-Score: 0.565482978771781"
+[1] "./2018-10-01_python_faersen/confusion_table_5h_ha2.csv"
+[1] "Zeitraum: 5 Alarm: _ha2"
+          Outcome +    Outcome -      Total
+Test +           12           21         33
+Test -           11          228        239
+Total            23          249        272
+
+Point estimates and 95 % CIs:
+---------------------------------------------------------
+Apparent prevalence                    0.12 (0.09, 0.17)
+True prevalence                        0.08 (0.05, 0.12)
+Sensitivity                            0.52 (0.31, 0.73)
+Specificity                            0.92 (0.87, 0.95)
+Positive predictive value              0.36 (0.20, 0.55)
+Negative predictive value              0.95 (0.92, 0.98)
+Positive likelihood ratio              6.19 (3.51, 10.90)
+Negative likelihood ratio              0.52 (0.34, 0.80)
+---------------------------------------------------------
+Confusion Matrix and Statistics
+
+    A   B
+A  12  21
+B  11 228
+                                         
+               Accuracy : 0.8824         
+                 95% CI : (0.838, 0.9181)
+    No Information Rate : 0.9154         
+    P-Value [Acc > NIR] : 0.9766         
+                                         
+                  Kappa : 0.3653         
+ Mcnemar's Test P-Value : 0.1116         
+                                         
+            Sensitivity : 0.52174        
+            Specificity : 0.91566        
+         Pos Pred Value : 0.36364        
+         Neg Pred Value : 0.95397        
+             Prevalence : 0.08456        
+         Detection Rate : 0.04412        
+   Detection Prevalence : 0.12132        
+      Balanced Accuracy : 0.71870        
+                                         
+       'Positive' Class : A              
+                                         
+[1] "Youden-Score: 0.425684251635718"
+[1] "./2018-10-01_python_faersen/confusion_table_6h.csv"
+[1] "Zeitraum: 6 Alarm: "
+          Outcome +    Outcome -      Total
+Test +           17           39         56
+Test -            6          166        172
+Total            23          205        228
+
+Point estimates and 95 % CIs:
+---------------------------------------------------------
+Apparent prevalence                    0.25 (0.19, 0.31)
+True prevalence                        0.10 (0.07, 0.15)
+Sensitivity                            0.74 (0.52, 0.90)
+Specificity                            0.81 (0.75, 0.86)
+Positive predictive value              0.30 (0.19, 0.44)
+Negative predictive value              0.97 (0.93, 0.99)
+Positive likelihood ratio              3.89 (2.68, 5.64)
+Negative likelihood ratio              0.32 (0.16, 0.64)
+---------------------------------------------------------
+Confusion Matrix and Statistics
+
+    A   B
+A  17  39
+B   6 166
+                                         
+               Accuracy : 0.8026         
+                 95% CI : (0.745, 0.8522)
+    No Information Rate : 0.8991         
+    P-Value [Acc > NIR] : 1              
+                                         
+                  Kappa : 0.3353         
+ Mcnemar's Test P-Value : 1.84e-06       
+                                         
+            Sensitivity : 0.73913        
+            Specificity : 0.80976        
+         Pos Pred Value : 0.30357        
+         Neg Pred Value : 0.96512        
+             Prevalence : 0.10088        
+         Detection Rate : 0.07456        
+   Detection Prevalence : 0.24561        
+      Balanced Accuracy : 0.77444        
+                                         
+       'Positive' Class : A              
+                                         
+[1] "Youden-Score: 0.555837248500292"
+[1] "./2018-10-01_python_faersen/confusion_table_6h_ha1.csv"
+[1] "Zeitraum: 6 Alarm: _ha1"
+          Outcome +    Outcome -      Total
+Test +           17           35         52
+Test -            6          170        176
+Total            23          205        228
+
+Point estimates and 95 % CIs:
+---------------------------------------------------------
+Apparent prevalence                    0.23 (0.18, 0.29)
+True prevalence                        0.10 (0.07, 0.15)
+Sensitivity                            0.74 (0.52, 0.90)
+Specificity                            0.83 (0.77, 0.88)
+Positive predictive value              0.33 (0.20, 0.47)
+Negative predictive value              0.97 (0.93, 0.99)
+Positive likelihood ratio              4.33 (2.94, 6.38)
+Negative likelihood ratio              0.31 (0.16, 0.63)
+---------------------------------------------------------
+Confusion Matrix and Statistics
+
+    A   B
+A  17  35
+B   6 170
+                                          
+               Accuracy : 0.8202          
+                 95% CI : (0.7641, 0.8678)
+    No Information Rate : 0.8991          
+    P-Value [Acc > NIR] : 0.9999          
+                                          
+                  Kappa : 0.3644          
+ Mcnemar's Test P-Value : 1.226e-05       
+                                          
+            Sensitivity : 0.73913         
+            Specificity : 0.82927         
+         Pos Pred Value : 0.32692         
+         Neg Pred Value : 0.96591         
+             Prevalence : 0.10088         
+         Detection Rate : 0.07456         
+   Detection Prevalence : 0.22807         
+      Balanced Accuracy : 0.78420         
+                                          
+       'Positive' Class : A               
+                                          
+[1] "Youden-Score: 0.562384867547911"
+[1] "./2018-10-01_python_faersen/confusion_table_6h_ha2.csv"
+[1] "Zeitraum: 6 Alarm: _ha2"
+          Outcome +    Outcome -      Total
+Test +           12           21         33
+Test -           11          184        195
+Total            23          205        228
+
+Point estimates and 95 % CIs:
+---------------------------------------------------------
+Apparent prevalence                    0.14 (0.10, 0.20)
+True prevalence                        0.10 (0.07, 0.15)
+Sensitivity                            0.52 (0.31, 0.73)
+Specificity                            0.90 (0.85, 0.94)
+Positive predictive value              0.36 (0.20, 0.55)
+Negative predictive value              0.94 (0.90, 0.97)
+Positive likelihood ratio              5.09 (2.90, 8.95)
+Negative likelihood ratio              0.53 (0.35, 0.82)
+---------------------------------------------------------
+Confusion Matrix and Statistics
+
+    A   B
+A  12  21
+B  11 184
+                                         
+               Accuracy : 0.8596         
+                 95% CI : (0.8077, 0.902)
+    No Information Rate : 0.8991         
+    P-Value [Acc > NIR] : 0.9776         
+                                         
+                  Kappa : 0.3515         
+ Mcnemar's Test P-Value : 0.1116         
+                                         
+            Sensitivity : 0.52174        
+            Specificity : 0.89756        
+         Pos Pred Value : 0.36364        
+         Neg Pred Value : 0.94359        
+             Prevalence : 0.10088        
+         Detection Rate : 0.05263        
+   Detection Prevalence : 0.14474        
+      Balanced Accuracy : 0.70965        
+                                         
+       'Positive' Class : A              
+                                         
+[1] "Youden-Score: 0.405081090407177"
+[1] "./2018-10-01_python_faersen/confusion_table_7h.csv"
+[1] "Zeitraum: 7 Alarm: "
+          Outcome +    Outcome -      Total
+Test +           17           37         54
+Test -            6          137        143
+Total            23          174        197
+
+Point estimates and 95 % CIs:
+---------------------------------------------------------
+Apparent prevalence                    0.27 (0.21, 0.34)
+True prevalence                        0.12 (0.08, 0.17)
+Sensitivity                            0.74 (0.52, 0.90)
+Specificity                            0.79 (0.72, 0.85)
+Positive predictive value              0.31 (0.20, 0.46)
+Negative predictive value              0.96 (0.91, 0.98)
+Positive likelihood ratio              3.48 (2.39, 5.06)
+Negative likelihood ratio              0.33 (0.17, 0.66)
+---------------------------------------------------------
+Confusion Matrix and Statistics
+
+    A   B
+A  17  37
+B   6 137
+                                          
+               Accuracy : 0.7817          
+                 95% CI : (0.7175, 0.8373)
+    No Information Rate : 0.8832          
+    P-Value [Acc > NIR] : 1               
+                                          
+                  Kappa : 0.3322          
+ Mcnemar's Test P-Value : 4.763e-06       
+                                          
+            Sensitivity : 0.73913         
+            Specificity : 0.78736         
+         Pos Pred Value : 0.31481         
+         Neg Pred Value : 0.95804         
+             Prevalence : 0.11675         
+         Detection Rate : 0.08629         
+   Detection Prevalence : 0.27411         
+      Balanced Accuracy : 0.76324         
+                                          
+       'Positive' Class : A               
+                                          
+[1] "Youden-Score: 0.512935985956581"
+[1] "./2018-10-01_python_faersen/confusion_table_7h_ha1.csv"
+[1] "Zeitraum: 7 Alarm: _ha1"
+          Outcome +    Outcome -      Total
+Test +           17           33         50
+Test -            6          141        147
+Total            23          174        197
+
+Point estimates and 95 % CIs:
+---------------------------------------------------------
+Apparent prevalence                    0.25 (0.19, 0.32)
+True prevalence                        0.12 (0.08, 0.17)
+Sensitivity                            0.74 (0.52, 0.90)
+Specificity                            0.81 (0.74, 0.87)
+Positive predictive value              0.34 (0.21, 0.49)
+Negative predictive value              0.96 (0.91, 0.98)
+Positive likelihood ratio              3.90 (2.63, 5.76)
+Negative likelihood ratio              0.32 (0.16, 0.64)
+---------------------------------------------------------
+Confusion Matrix and Statistics
+
+    A   B
+A  17  33
+B   6 141
+                                          
+               Accuracy : 0.802           
+                 95% CI : (0.7395, 0.8553)
+    No Information Rate : 0.8832          
+    P-Value [Acc > NIR] : 0.9997          
+                                          
+                  Kappa : 0.364           
+ Mcnemar's Test P-Value : 3.136e-05       
+                                          
+            Sensitivity : 0.73913         
+            Specificity : 0.81034         
+         Pos Pred Value : 0.34000         
+         Neg Pred Value : 0.95918         
+             Prevalence : 0.11675         
+         Detection Rate : 0.08629         
+   Detection Prevalence : 0.25381         
+      Balanced Accuracy : 0.77474         
+                                          
+       'Positive' Class : A               
+                                          
+[1] "Youden-Score: 0.545435985956581"
+[1] "./2018-10-01_python_faersen/confusion_table_7h_ha2.csv"
+[1] "Zeitraum: 7 Alarm: _ha2"
+          Outcome +    Outcome -      Total
+Test +           12           22         34
+Test -           11          152        163
+Total            23          174        197
+
+Point estimates and 95 % CIs:
+---------------------------------------------------------
+Apparent prevalence                    0.17 (0.12, 0.23)
+True prevalence                        0.12 (0.08, 0.17)
+Sensitivity                            0.52 (0.31, 0.73)
+Specificity                            0.87 (0.81, 0.92)
+Positive predictive value              0.35 (0.20, 0.54)
+Negative predictive value              0.93 (0.88, 0.97)
+Positive likelihood ratio              4.13 (2.37, 7.17)
+Negative likelihood ratio              0.55 (0.36, 0.84)
+---------------------------------------------------------
+Confusion Matrix and Statistics
+
+    A   B
+A  12  22
+B  11 152
+                                          
+               Accuracy : 0.8325          
+                 95% CI : (0.7729, 0.8818)
+    No Information Rate : 0.8832          
+    P-Value [Acc > NIR] : 0.98701         
+                                          
+                  Kappa : 0.3274          
+ Mcnemar's Test P-Value : 0.08172         
+                                          
+            Sensitivity : 0.52174         
+            Specificity : 0.87356         
+         Pos Pred Value : 0.35294         
+         Neg Pred Value : 0.93252         
+             Prevalence : 0.11675         
+         Detection Rate : 0.06091         
+   Detection Prevalence : 0.17259         
+      Balanced Accuracy : 0.69765         
+                                          
+       'Positive' Class : A               
+                                          
+[1] "Youden-Score: 0.374586794466657"
+[1] "./2018-10-01_python_faersen/confusion_table_8h.csv"
+[1] "Zeitraum: 8 Alarm: "
+          Outcome +    Outcome -      Total
+Test +           17           36         53
+Test -            6          115        121
+Total            23          151        174
+
+Point estimates and 95 % CIs:
+---------------------------------------------------------
+Apparent prevalence                    0.30 (0.24, 0.38)
+True prevalence                        0.13 (0.09, 0.19)
+Sensitivity                            0.74 (0.52, 0.90)
+Specificity                            0.76 (0.69, 0.83)
+Positive predictive value              0.32 (0.20, 0.46)
+Negative predictive value              0.95 (0.90, 0.98)
+Positive likelihood ratio              3.10 (2.13, 4.51)
+Negative likelihood ratio              0.34 (0.17, 0.69)
+---------------------------------------------------------
+Confusion Matrix and Statistics
+
+    A   B
+A  17  36
+B   6 115
+                                          
+               Accuracy : 0.7586          
+                 95% CI : (0.6881, 0.8202)
+    No Information Rate : 0.8678          
+    P-Value [Acc > NIR] : 1               
+                                          
+                  Kappa : 0.3225          
+ Mcnemar's Test P-Value : 7.648e-06       
+                                          
+            Sensitivity : 0.7391          
+            Specificity : 0.7616          
+         Pos Pred Value : 0.3208          
+         Neg Pred Value : 0.9504          
+             Prevalence : 0.1322          
+         Detection Rate : 0.0977          
+   Detection Prevalence : 0.3046          
+      Balanced Accuracy : 0.7504          
+                                          
+       'Positive' Class : A               
+                                          
+[1] "Youden-Score: 0.4784248495182"
+[1] "./2018-10-01_python_faersen/confusion_table_8h_ha1.csv"
+[1] "Zeitraum: 8 Alarm: _ha1"
+          Outcome +    Outcome -      Total
+Test +           17           35         52
+Test -            6          116        122
+Total            23          151        174
+
+Point estimates and 95 % CIs:
+---------------------------------------------------------
+Apparent prevalence                    0.30 (0.23, 0.37)
+True prevalence                        0.13 (0.09, 0.19)
+Sensitivity                            0.74 (0.52, 0.90)
+Specificity                            0.77 (0.69, 0.83)
+Positive predictive value              0.33 (0.20, 0.47)
+Negative predictive value              0.95 (0.90, 0.98)
+Positive likelihood ratio              3.19 (2.18, 4.66)
+Negative likelihood ratio              0.34 (0.17, 0.68)
+---------------------------------------------------------
+Confusion Matrix and Statistics
+
+    A   B
+A  17  35
+B   6 116
+                                          
+               Accuracy : 0.7644          
+                 95% CI : (0.6942, 0.8253)
+    No Information Rate : 0.8678          
+    P-Value [Acc > NIR] : 0.9999          
+                                          
+                  Kappa : 0.3306          
+ Mcnemar's Test P-Value : 1.226e-05       
+                                          
+            Sensitivity : 0.7391          
+            Specificity : 0.7682          
+         Pos Pred Value : 0.3269          
+         Neg Pred Value : 0.9508          
+             Prevalence : 0.1322          
+         Detection Rate : 0.0977          
+   Detection Prevalence : 0.2989          
+      Balanced Accuracy : 0.7537          
+                                          
+       'Positive' Class : A               
+                                          
+[1] "Youden-Score: 0.480276701370052"
+[1] "./2018-10-01_python_faersen/confusion_table_8h_ha2.csv"
+[1] "Zeitraum: 8 Alarm: _ha2"
+          Outcome +    Outcome -      Total
+Test +           12           21         33
+Test -           11          130        141
+Total            23          151        174
+
+Point estimates and 95 % CIs:
+---------------------------------------------------------
+Apparent prevalence                    0.19 (0.13, 0.26)
+True prevalence                        0.13 (0.09, 0.19)
+Sensitivity                            0.52 (0.31, 0.73)
+Specificity                            0.86 (0.80, 0.91)
+Positive predictive value              0.36 (0.20, 0.55)
+Negative predictive value              0.92 (0.86, 0.96)
+Positive likelihood ratio              3.75 (2.15, 6.55)
+Negative likelihood ratio              0.56 (0.36, 0.86)
+---------------------------------------------------------
+Confusion Matrix and Statistics
+
+    A   B
+A  12  21
+B  11 130
+                                          
+               Accuracy : 0.8161          
+                 95% CI : (0.7504, 0.8707)
+    No Information Rate : 0.8678          
+    P-Value [Acc > NIR] : 0.9796          
+                                          
+                  Kappa : 0.3231          
+ Mcnemar's Test P-Value : 0.1116          
+                                          
+            Sensitivity : 0.52174         
+            Specificity : 0.86093         
+         Pos Pred Value : 0.36364         
+         Neg Pred Value : 0.92199         
+             Prevalence : 0.13218         
+         Detection Rate : 0.06897         
+   Detection Prevalence : 0.18966         
+      Balanced Accuracy : 0.69133         
+                                          
+       'Positive' Class : A               
+                                          
+[1] "Youden-Score: 0.361289536455777"
+[1] "./2018-10-01_python_faersen/confusion_table_9h.csv"
+[1] "Zeitraum: 9 Alarm: "
+          Outcome +    Outcome -      Total
+Test +           17           35         52
+Test -            6           98        104
+Total            23          133        156
+
+Point estimates and 95 % CIs:
+---------------------------------------------------------
+Apparent prevalence                    0.33 (0.26, 0.41)
+True prevalence                        0.15 (0.10, 0.21)
+Sensitivity                            0.74 (0.52, 0.90)
+Specificity                            0.74 (0.65, 0.81)
+Positive predictive value              0.33 (0.20, 0.47)
+Negative predictive value              0.94 (0.88, 0.98)
+Positive likelihood ratio              2.81 (1.93, 4.08)
+Negative likelihood ratio              0.35 (0.18, 0.71)
+---------------------------------------------------------
+Confusion Matrix and Statistics
+
+   A  B
+A 17 35
+B  6 98
+                                          
+               Accuracy : 0.7372          
+                 95% CI : (0.6608, 0.8043)
+    No Information Rate : 0.8526          
+    P-Value [Acc > NIR] : 0.9999          
+                                          
+                  Kappa : 0.3128          
+ Mcnemar's Test P-Value : 1.226e-05       
+                                          
+            Sensitivity : 0.7391          
+            Specificity : 0.7368          
+         Pos Pred Value : 0.3269          
+         Neg Pred Value : 0.9423          
+             Prevalence : 0.1474          
+         Detection Rate : 0.1090          
+   Detection Prevalence : 0.3333          
+      Balanced Accuracy : 0.7380          
+                                          
+       'Positive' Class : A               
+                                          
+[1] "Youden-Score: 0.474844720496894"
+[1] "./2018-10-01_python_faersen/confusion_table_9h_ha1.csv"
+[1] "Zeitraum: 9 Alarm: _ha1"
+          Outcome +    Outcome -      Total
+Test +           17           33         50
+Test -            6          100        106
+Total            23          133        156
+
+Point estimates and 95 % CIs:
+---------------------------------------------------------
+Apparent prevalence                    0.32 (0.25, 0.40)
+True prevalence                        0.15 (0.10, 0.21)
+Sensitivity                            0.74 (0.52, 0.90)
+Specificity                            0.75 (0.67, 0.82)
+Positive predictive value              0.34 (0.21, 0.49)
+Negative predictive value              0.94 (0.88, 0.98)
+Positive likelihood ratio              2.98 (2.03, 4.37)
+Negative likelihood ratio              0.35 (0.17, 0.70)
+---------------------------------------------------------
+Confusion Matrix and Statistics
+
+    A   B
+A  17  33
+B   6 100
+                                          
+               Accuracy : 0.75            
+                 95% CI : (0.6745, 0.8158)
+    No Information Rate : 0.8526          
+    P-Value [Acc > NIR] : 0.9997          
+                                          
+                  Kappa : 0.3305          
+ Mcnemar's Test P-Value : 3.136e-05       
+                                          
+            Sensitivity : 0.7391          
+            Specificity : 0.7519          
+         Pos Pred Value : 0.3400          
+         Neg Pred Value : 0.9434          
+             Prevalence : 0.1474          
+         Detection Rate : 0.1090          
+   Detection Prevalence : 0.3205          
+      Balanced Accuracy : 0.7455          
+                                          
+       'Positive' Class : A               
+                                          
+[1] "Youden-Score: 0.479011387163561"
+[1] "./2018-10-01_python_faersen/confusion_table_9h_ha2.csv"
+[1] "Zeitraum: 9 Alarm: _ha2"
+          Outcome +    Outcome -      Total
+Test +           12           20         32
+Test -           11          113        124
+Total            23          133        156
+
+Point estimates and 95 % CIs:
+---------------------------------------------------------
+Apparent prevalence                    0.21 (0.14, 0.28)
+True prevalence                        0.15 (0.10, 0.21)
+Sensitivity                            0.52 (0.31, 0.73)
+Specificity                            0.85 (0.78, 0.91)
+Positive predictive value              0.38 (0.21, 0.56)
+Negative predictive value              0.91 (0.85, 0.95)
+Positive likelihood ratio              3.47 (1.98, 6.09)
+Negative likelihood ratio              0.56 (0.37, 0.87)
+---------------------------------------------------------
+Confusion Matrix and Statistics
+
+    A   B
+A  12  20
+B  11 113
+                                        
+               Accuracy : 0.8013        
+                 95% CI : (0.73, 0.8608)
+    No Information Rate : 0.8526        
+    P-Value [Acc > NIR] : 0.9685        
+                                        
+                  Kappa : 0.3196        
+ Mcnemar's Test P-Value : 0.1508        
+                                        
+            Sensitivity : 0.52174       
+            Specificity : 0.84962       
+         Pos Pred Value : 0.37500       
+         Neg Pred Value : 0.91129       
+             Prevalence : 0.14744       
+         Detection Rate : 0.07692       
+   Detection Prevalence : 0.20513       
+      Balanced Accuracy : 0.68568       
+                                        
+       'Positive' Class : A             
+                                        
+[1] "Youden-Score: 0.363346273291925"
+[1] "./2018-10-01_python_faersen/confusion_table_10h.csv"
+[1] "Zeitraum: 10 Alarm: "
+          Outcome +    Outcome -      Total
+Test +           17           35         52
+Test -            6           83         89
+Total            23          118        141
+
+Point estimates and 95 % CIs:
+---------------------------------------------------------
+Apparent prevalence                    0.37 (0.29, 0.45)
+True prevalence                        0.16 (0.11, 0.23)
+Sensitivity                            0.74 (0.52, 0.90)
+Specificity                            0.70 (0.61, 0.78)
+Positive predictive value              0.33 (0.20, 0.47)
+Negative predictive value              0.93 (0.86, 0.97)
+Positive likelihood ratio              2.49 (1.72, 3.60)
+Negative likelihood ratio              0.37 (0.18, 0.75)
+---------------------------------------------------------
+Confusion Matrix and Statistics
+
+   A  B
+A 17 35
+B  6 83
+                                          
+               Accuracy : 0.7092          
+                 95% CI : (0.6268, 0.7826)
+    No Information Rate : 0.8369          
+    P-Value [Acc > NIR] : 1               
+                                          
+                  Kappa : 0.2935          
+ Mcnemar's Test P-Value : 1.226e-05       
+                                          
+            Sensitivity : 0.7391          
+            Specificity : 0.7034          
+         Pos Pred Value : 0.3269          
+         Neg Pred Value : 0.9326          
+             Prevalence : 0.1631          
+         Detection Rate : 0.1206          
+   Detection Prevalence : 0.3688          
+      Balanced Accuracy : 0.7213          
+                                          
+       'Positive' Class : A               
+                                          
+[1] "Youden-Score: 0.413343210311174"
+[1] "./2018-10-01_python_faersen/confusion_table_10h_ha1.csv"
+[1] "Zeitraum: 10 Alarm: _ha1"
+          Outcome +    Outcome -      Total
+Test +           17           32         49
+Test -            6           86         92
+Total            23          118        141
+
+Point estimates and 95 % CIs:
+---------------------------------------------------------
+Apparent prevalence                    0.35 (0.27, 0.43)
+True prevalence                        0.16 (0.11, 0.23)
+Sensitivity                            0.74 (0.52, 0.90)
+Specificity                            0.73 (0.64, 0.81)
+Positive predictive value              0.35 (0.22, 0.50)
+Negative predictive value              0.93 (0.86, 0.98)
+Positive likelihood ratio              2.73 (1.86, 4.00)
+Negative likelihood ratio              0.36 (0.18, 0.72)
+---------------------------------------------------------
+Confusion Matrix and Statistics
+
+   A  B
+A 17 32
+B  6 86
+                                          
+               Accuracy : 0.7305          
+                 95% CI : (0.6493, 0.8017)
+    No Information Rate : 0.8369          
+    P-Value [Acc > NIR] : 0.9995          
+                                          
+                  Kappa : 0.3216          
+ Mcnemar's Test P-Value : 5.002e-05       
+                                          
+            Sensitivity : 0.7391          
+            Specificity : 0.7288          
+         Pos Pred Value : 0.3469          
+         Neg Pred Value : 0.9348          
+             Prevalence : 0.1631          
+         Detection Rate : 0.1206          
+   Detection Prevalence : 0.3475          
+      Balanced Accuracy : 0.7340          
+                                          
+       'Positive' Class : A               
+                                          
+[1] "Youden-Score: 0.428882057428968"
+[1] "./2018-10-01_python_faersen/confusion_table_10h_ha2.csv"
+[1] "Zeitraum: 10 Alarm: _ha2"
+          Outcome +    Outcome -      Total
+Test +           12           19         31
+Test -           11           99        110
+Total            23          118        141
+
+Point estimates and 95 % CIs:
+---------------------------------------------------------
+Apparent prevalence                    0.22 (0.15, 0.30)
+True prevalence                        0.16 (0.11, 0.23)
+Sensitivity                            0.52 (0.31, 0.73)
+Specificity                            0.84 (0.76, 0.90)
+Positive predictive value              0.39 (0.22, 0.58)
+Negative predictive value              0.90 (0.83, 0.95)
+Positive likelihood ratio              3.24 (1.84, 5.72)
+Negative likelihood ratio              0.57 (0.37, 0.88)
+---------------------------------------------------------
+Confusion Matrix and Statistics
+
+   A  B
+A 12 19
+B 11 99
+                                          
+               Accuracy : 0.7872          
+                 95% CI : (0.7104, 0.8516)
+    No Information Rate : 0.8369          
+    P-Value [Acc > NIR] : 0.9523          
+                                          
+                  Kappa : 0.3164          
+ Mcnemar's Test P-Value : 0.2012          
+                                          
+            Sensitivity : 0.52174         
+            Specificity : 0.83898         
+         Pos Pred Value : 0.38710         
+         Neg Pred Value : 0.90000         
+             Prevalence : 0.16312         
+         Detection Rate : 0.08511         
+   Detection Prevalence : 0.21986         
+      Balanced Accuracy : 0.68036         
+                                          
+       'Positive' Class : A               
+                                          
+[1] "Youden-Score: 0.326629561641003"
+[1] "./2018-10-01_python_faersen/confusion_table_11h.csv"
+[1] "Zeitraum: 11 Alarm: "
+          Outcome +    Outcome -      Total
+Test +           17           33         50
+Test -            6           75         81
+Total            23          108        131
+
+Point estimates and 95 % CIs:
+---------------------------------------------------------
+Apparent prevalence                    0.38 (0.30, 0.47)
+True prevalence                        0.18 (0.11, 0.25)
+Sensitivity                            0.74 (0.52, 0.90)
+Specificity                            0.69 (0.60, 0.78)
+Positive predictive value              0.34 (0.21, 0.49)
+Negative predictive value              0.93 (0.85, 0.97)
+Positive likelihood ratio              2.42 (1.66, 3.52)
+Negative likelihood ratio              0.38 (0.19, 0.76)
+---------------------------------------------------------
+Confusion Matrix and Statistics
+
+   A  B
+A 17 33
+B  6 75
+                                         
+               Accuracy : 0.7023         
+                 95% CI : (0.6162, 0.779)
+    No Information Rate : 0.8244         
+    P-Value [Acc > NIR] : 0.9998         
+                                         
+                  Kappa : 0.2966         
+ Mcnemar's Test P-Value : 3.136e-05      
+                                         
+            Sensitivity : 0.7391         
+            Specificity : 0.6944         
+         Pos Pred Value : 0.3400         
+         Neg Pred Value : 0.9259         
+             Prevalence : 0.1756         
+         Detection Rate : 0.1298         
+   Detection Prevalence : 0.3817         
+      Balanced Accuracy : 0.7168         
+                                         
+       'Positive' Class : A              
+                                         
+[1] "Youden-Score: 0.402338994459312"
+[1] "./2018-10-01_python_faersen/confusion_table_11h_ha1.csv"
+[1] "Zeitraum: 11 Alarm: _ha1"
+          Outcome +    Outcome -      Total
+Test +           17           30         47
+Test -            6           78         84
+Total            23          108        131
+
+Point estimates and 95 % CIs:
+---------------------------------------------------------
+Apparent prevalence                    0.36 (0.28, 0.45)
+True prevalence                        0.18 (0.11, 0.25)
+Sensitivity                            0.74 (0.52, 0.90)
+Specificity                            0.72 (0.63, 0.80)
+Positive predictive value              0.36 (0.23, 0.51)
+Negative predictive value              0.93 (0.85, 0.97)
+Positive likelihood ratio              2.66 (1.80, 3.93)
+Negative likelihood ratio              0.36 (0.18, 0.73)
+---------------------------------------------------------
+Confusion Matrix and Statistics
+
+   A  B
+A 17 30
+B  6 78
+                                          
+               Accuracy : 0.7252          
+                 95% CI : (0.6404, 0.7995)
+    No Information Rate : 0.8244          
+    P-Value [Acc > NIR] : 0.9983210       
+                                          
+                  Kappa : 0.3271          
+ Mcnemar's Test P-Value : 0.0001264       
+                                          
+            Sensitivity : 0.7391          
+            Specificity : 0.7222          
+         Pos Pred Value : 0.3617          
+         Neg Pred Value : 0.9286          
+             Prevalence : 0.1756          
+         Detection Rate : 0.1298          
+   Detection Prevalence : 0.3588          
+      Balanced Accuracy : 0.7307          
+                                          
+       'Positive' Class : A               
+                                          
+[1] "Youden-Score: 0.427437626206144"
+[1] "./2018-10-01_python_faersen/confusion_table_11h_ha2.csv"
+[1] "Zeitraum: 11 Alarm: _ha2"
+          Outcome +    Outcome -      Total
+Test +           13           19         32
+Test -           10           89         99
+Total            23          108        131
+
+Point estimates and 95 % CIs:
+---------------------------------------------------------
+Apparent prevalence                    0.24 (0.17, 0.33)
+True prevalence                        0.18 (0.11, 0.25)
+Sensitivity                            0.57 (0.34, 0.77)
+Specificity                            0.82 (0.74, 0.89)
+Positive predictive value              0.41 (0.24, 0.59)
+Negative predictive value              0.90 (0.82, 0.95)
+Positive likelihood ratio              3.21 (1.87, 5.53)
+Negative likelihood ratio              0.53 (0.33, 0.85)
+---------------------------------------------------------
+Confusion Matrix and Statistics
+
+   A  B
+A 13 19
+B 10 89
+                                          
+               Accuracy : 0.7786          
+                 95% CI : (0.6978, 0.8465)
+    No Information Rate : 0.8244          
+    P-Value [Acc > NIR] : 0.9288          
+                                          
+                  Kappa : 0.3373          
+ Mcnemar's Test P-Value : 0.1374          
+                                          
+            Sensitivity : 0.56522         
+            Specificity : 0.82407         
+         Pos Pred Value : 0.40625         
+         Neg Pred Value : 0.89899         
+             Prevalence : 0.17557         
+         Detection Rate : 0.09924         
+   Detection Prevalence : 0.24427         
+      Balanced Accuracy : 0.69465         
+                                          
+       'Positive' Class : A               
+                                          
+[1] "Youden-Score: 0.367397782473659"
+[1] "./2018-10-01_python_faersen/confusion_table_12h.csv"
+[1] "Zeitraum: 12 Alarm: "
+          Outcome +    Outcome -      Total
+Test +           17           30         47
+Test -            6           67         73
+Total            23           97        120
+
+Point estimates and 95 % CIs:
+---------------------------------------------------------
+Apparent prevalence                    0.39 (0.30, 0.48)
+True prevalence                        0.19 (0.13, 0.27)
+Sensitivity                            0.74 (0.52, 0.90)
+Specificity                            0.69 (0.59, 0.78)
+Positive predictive value              0.36 (0.23, 0.51)
+Negative predictive value              0.92 (0.83, 0.97)
+Positive likelihood ratio              2.39 (1.63, 3.51)
+Negative likelihood ratio              0.38 (0.19, 0.76)
+---------------------------------------------------------
+Confusion Matrix and Statistics
+
+   A  B
+A 17 30
+B  6 67
+                                          
+               Accuracy : 0.7             
+                 95% CI : (0.6096, 0.7802)
+    No Information Rate : 0.8083          
+    P-Value [Acc > NIR] : 0.9984998       
+                                          
+                  Kappa : 0.3075          
+ Mcnemar's Test P-Value : 0.0001264       
+                                          
+            Sensitivity : 0.7391          
+            Specificity : 0.6907          
+         Pos Pred Value : 0.3617          
+         Neg Pred Value : 0.9178          
+             Prevalence : 0.1917          
+         Detection Rate : 0.1417          
+   Detection Prevalence : 0.3917          
+      Balanced Accuracy : 0.7149          
+                                          
+       'Positive' Class : A               
+                                          
+[1] "Youden-Score: 0.453328809507299"
+[1] "./2018-10-01_python_faersen/confusion_table_12h_ha1.csv"
+[1] "Zeitraum: 12 Alarm: _ha1"
+          Outcome +    Outcome -      Total
+Test +           17           28         45
+Test -            6           69         75
+Total            23           97        120
+
+Point estimates and 95 % CIs:
+---------------------------------------------------------
+Apparent prevalence                    0.38 (0.29, 0.47)
+True prevalence                        0.19 (0.13, 0.27)
+Sensitivity                            0.74 (0.52, 0.90)
+Specificity                            0.71 (0.61, 0.80)
+Positive predictive value              0.38 (0.24, 0.53)
+Negative predictive value              0.92 (0.83, 0.97)
+Positive likelihood ratio              2.56 (1.72, 3.80)
+Negative likelihood ratio              0.37 (0.18, 0.74)
+---------------------------------------------------------
+Confusion Matrix and Statistics
+
+   A  B
+A 17 28
+B  6 69
+                                          
+               Accuracy : 0.7167          
+                 95% CI : (0.6272, 0.7951)
+    No Information Rate : 0.8083          
+    P-Value [Acc > NIR] : 0.9946204       
+                                          
+                  Kappa : 0.33            
+ Mcnemar's Test P-Value : 0.0003164       
+                                          
+            Sensitivity : 0.7391          
+            Specificity : 0.7113          
+         Pos Pred Value : 0.3778          
+         Neg Pred Value : 0.9200          
+             Prevalence : 0.1917          
+         Detection Rate : 0.1417          
+   Detection Prevalence : 0.3750          
+      Balanced Accuracy : 0.7252          
+                                          
+       'Positive' Class : A               
+                                          
+[1] "Youden-Score: 0.459176762723673"
+[1] "./2018-10-01_python_faersen/confusion_table_12h_ha2.csv"
+[1] "Zeitraum: 12 Alarm: _ha2"
+          Outcome +    Outcome -      Total
+Test +           13           19         32
+Test -           10           78         88
+Total            23           97        120
+
+Point estimates and 95 % CIs:
+---------------------------------------------------------
+Apparent prevalence                    0.27 (0.19, 0.36)
+True prevalence                        0.19 (0.13, 0.27)
+Sensitivity                            0.57 (0.34, 0.77)
+Specificity                            0.80 (0.71, 0.88)
+Positive predictive value              0.41 (0.24, 0.59)
+Negative predictive value              0.89 (0.80, 0.94)
+Positive likelihood ratio              2.89 (1.68, 4.95)
+Negative likelihood ratio              0.54 (0.34, 0.87)
+---------------------------------------------------------
+Confusion Matrix and Statistics
+
+   A  B
+A 13 19
+B 10 78
+                                          
+               Accuracy : 0.7583          
+                 95% CI : (0.6717, 0.8318)
+    No Information Rate : 0.8083          
+    P-Value [Acc > NIR] : 0.9308          
+                                          
+                  Kappa : 0.3214          
+ Mcnemar's Test P-Value : 0.1374          
+                                          
+            Sensitivity : 0.5652          
+            Specificity : 0.8041          
+         Pos Pred Value : 0.4062          
+         Neg Pred Value : 0.8864          
+             Prevalence : 0.1917          
+         Detection Rate : 0.1083          
+   Detection Prevalence : 0.2667          
+      Balanced Accuracy : 0.6847          
+                                          
+       'Positive' Class : A               
+                                          
+[1] "Youden-Score: 0.34648115677864"
+[1] "./2018-10-01_python_faersen/confusion_table_13h.csv"
+[1] "Zeitraum: 13 Alarm: "
+          Outcome +    Outcome -      Total
+Test +           17           26         43
+Test -            6           65         71
+Total            23           91        114
+
+Point estimates and 95 % CIs:
+---------------------------------------------------------
+Apparent prevalence                    0.38 (0.29, 0.47)
+True prevalence                        0.20 (0.13, 0.29)
+Sensitivity                            0.74 (0.52, 0.90)
+Specificity                            0.71 (0.61, 0.80)
+Positive predictive value              0.40 (0.25, 0.56)
+Negative predictive value              0.92 (0.83, 0.97)
+Positive likelihood ratio              2.59 (1.72, 3.88)
+Negative likelihood ratio              0.37 (0.18, 0.74)
+---------------------------------------------------------
+Confusion Matrix and Statistics
+
+   A  B
+A 17 26
+B  6 65
+                                          
+               Accuracy : 0.7193          
+                 95% CI : (0.6274, 0.7994)
+    No Information Rate : 0.7982          
+    P-Value [Acc > NIR] : 0.9839246       
+                                          
+                  Kappa : 0.3422          
+ Mcnemar's Test P-Value : 0.0007829       
+                                          
+            Sensitivity : 0.7391          
+            Specificity : 0.7143          
+         Pos Pred Value : 0.3953          
+         Neg Pred Value : 0.9155          
+             Prevalence : 0.2018          
+         Detection Rate : 0.1491          
+   Detection Prevalence : 0.3772          
+      Balanced Accuracy : 0.7267          
+                                          
+       'Positive' Class : A               
+                                          
+[1] "Youden-Score: 0.495427427263812"
+[1] "./2018-10-01_python_faersen/confusion_table_13h_ha1.csv"
+[1] "Zeitraum: 13 Alarm: _ha1"
+          Outcome +    Outcome -      Total
+Test +           17           24         41
+Test -            6           67         73
+Total            23           91        114
+
+Point estimates and 95 % CIs:
+---------------------------------------------------------
+Apparent prevalence                    0.36 (0.27, 0.45)
+True prevalence                        0.20 (0.13, 0.29)
+Sensitivity                            0.74 (0.52, 0.90)
+Specificity                            0.74 (0.63, 0.82)
+Positive predictive value              0.41 (0.26, 0.58)
+Negative predictive value              0.92 (0.83, 0.97)
+Positive likelihood ratio              2.80 (1.84, 4.27)
+Negative likelihood ratio              0.35 (0.18, 0.71)
+---------------------------------------------------------
+Confusion Matrix and Statistics
+
+   A  B
+A 17 24
+B  6 67
+                                          
+               Accuracy : 0.7368          
+                 95% CI : (0.6461, 0.8149)
+    No Information Rate : 0.7982          
+    P-Value [Acc > NIR] : 0.956376        
+                                          
+                  Kappa : 0.3678          
+ Mcnemar's Test P-Value : 0.001911        
+                                          
+            Sensitivity : 0.7391          
+            Specificity : 0.7363          
+         Pos Pred Value : 0.4146          
+         Neg Pred Value : 0.9178          
+             Prevalence : 0.2018          
+         Detection Rate : 0.1491          
+   Detection Prevalence : 0.3596          
+      Balanced Accuracy : 0.7377          
+                                          
+       'Positive' Class : A               
+                                          
+[1] "Youden-Score: 0.503980058842759"
+[1] "./2018-10-01_python_faersen/confusion_table_13h_ha2.csv"
+[1] "Zeitraum: 13 Alarm: _ha2"
+          Outcome +    Outcome -      Total
+Test +           13           15         28
+Test -           10           76         86
+Total            23           91        114
+
+Point estimates and 95 % CIs:
+---------------------------------------------------------
+Apparent prevalence                    0.25 (0.17, 0.34)
+True prevalence                        0.20 (0.13, 0.29)
+Sensitivity                            0.57 (0.34, 0.77)
+Specificity                            0.84 (0.74, 0.90)
+Positive predictive value              0.46 (0.28, 0.66)
+Negative predictive value              0.88 (0.80, 0.94)
+Positive likelihood ratio              3.43 (1.91, 6.16)
+Negative likelihood ratio              0.52 (0.32, 0.84)
+---------------------------------------------------------
+Confusion Matrix and Statistics
+
+   A  B
+A 13 15
+B 10 76
+                                          
+               Accuracy : 0.7807          
+                 95% CI : (0.6935, 0.8528)
+    No Information Rate : 0.7982          
+    P-Value [Acc > NIR] : 0.7253          
+                                          
+                  Kappa : 0.3703          
+ Mcnemar's Test P-Value : 0.4237          
+                                          
+            Sensitivity : 0.5652          
+            Specificity : 0.8352          
+         Pos Pred Value : 0.4643          
+         Neg Pred Value : 0.8837          
+             Prevalence : 0.2018          
+         Detection Rate : 0.1140          
+   Detection Prevalence : 0.2456          
+      Balanced Accuracy : 0.7002          
+                                          
+       'Positive' Class : A               
+                                          
+[1] "Youden-Score: 0.40696760015982"
+[1] "./2018-10-01_python_faersen/confusion_table_14h.csv"
+[1] "Zeitraum: 14 Alarm: "
+          Outcome +    Outcome -      Total
+Test +           18           25         43
+Test -            5           57         62
+Total            23           82        105
+
+Point estimates and 95 % CIs:
+---------------------------------------------------------
+Apparent prevalence                    0.41 (0.31, 0.51)
+True prevalence                        0.22 (0.14, 0.31)
+Sensitivity                            0.78 (0.56, 0.93)
+Specificity                            0.70 (0.58, 0.79)
+Positive predictive value              0.42 (0.27, 0.58)
+Negative predictive value              0.92 (0.82, 0.97)
+Positive likelihood ratio              2.57 (1.74, 3.80)
+Negative likelihood ratio              0.31 (0.14, 0.69)
+---------------------------------------------------------
+Confusion Matrix and Statistics
+
+   A  B
+A 18 25
+B  5 57
+                                          
+               Accuracy : 0.7143          
+                 95% CI : (0.6179, 0.7982)
+    No Information Rate : 0.781           
+    P-Value [Acc > NIR] : 0.9581967       
+                                          
+                  Kappa : 0.3639          
+ Mcnemar's Test P-Value : 0.0005226       
+                                          
+            Sensitivity : 0.7826          
+            Specificity : 0.6951          
+         Pos Pred Value : 0.4186          
+         Neg Pred Value : 0.9194          
+             Prevalence : 0.2190          
+         Detection Rate : 0.1714          
+   Detection Prevalence : 0.4095          
+      Balanced Accuracy : 0.7389          
+                                          
+       'Positive' Class : A               
+                                          
+[1] "Youden-Score: 0.502491736587847"
+[1] "./2018-10-01_python_faersen/confusion_table_14h_ha1.csv"
+[1] "Zeitraum: 14 Alarm: _ha1"
+          Outcome +    Outcome -      Total
+Test +           17           24         41
+Test -            6           58         64
+Total            23           82        105
+
+Point estimates and 95 % CIs:
+---------------------------------------------------------
+Apparent prevalence                    0.39 (0.30, 0.49)
+True prevalence                        0.22 (0.14, 0.31)
+Sensitivity                            0.74 (0.52, 0.90)
+Specificity                            0.71 (0.60, 0.80)
+Positive predictive value              0.41 (0.26, 0.58)
+Negative predictive value              0.91 (0.81, 0.96)
+Positive likelihood ratio              2.53 (1.67, 3.82)
+Negative likelihood ratio              0.37 (0.18, 0.74)
+---------------------------------------------------------
+Confusion Matrix and Statistics
+
+   A  B
+A 17 24
+B  6 58
+                                          
+               Accuracy : 0.7143          
+                 95% CI : (0.6179, 0.7982)
+    No Information Rate : 0.781           
+    P-Value [Acc > NIR] : 0.958197        
+                                          
+                  Kappa : 0.3484          
+ Mcnemar's Test P-Value : 0.001911        
+                                          
+            Sensitivity : 0.7391          
+            Specificity : 0.7073          
+         Pos Pred Value : 0.4146          
+         Neg Pred Value : 0.9062          
+             Prevalence : 0.2190          
+         Detection Rate : 0.1619          
+   Detection Prevalence : 0.3905          
+      Balanced Accuracy : 0.7232          
+                                          
+       'Positive' Class : A               
+                                          
+[1] "Youden-Score: 0.462522247648106"
+[1] "./2018-10-01_python_faersen/confusion_table_14h_ha2.csv"
+[1] "Zeitraum: 14 Alarm: _ha2"
+          Outcome +    Outcome -      Total
+Test +           14           15         29
+Test -            9           67         76
+Total            23           82        105
+
+Point estimates and 95 % CIs:
+---------------------------------------------------------
+Apparent prevalence                    0.28 (0.19, 0.37)
+True prevalence                        0.22 (0.14, 0.31)
+Sensitivity                            0.61 (0.39, 0.80)
+Specificity                            0.82 (0.72, 0.89)
+Positive predictive value              0.48 (0.29, 0.67)
+Negative predictive value              0.88 (0.79, 0.94)
+Positive likelihood ratio              3.33 (1.90, 5.84)
+Negative likelihood ratio              0.48 (0.28, 0.81)
+---------------------------------------------------------
+Confusion Matrix and Statistics
+
+   A  B
+A 14 15
+B  9 67
+                                          
+               Accuracy : 0.7714          
+                 95% CI : (0.6793, 0.8477)
+    No Information Rate : 0.781           
+    P-Value [Acc > NIR] : 0.6454          
+                                          
+                  Kappa : 0.3892          
+ Mcnemar's Test P-Value : 0.3074          
+                                          
+            Sensitivity : 0.6087          
+            Specificity : 0.8171          
+         Pos Pred Value : 0.4828          
+         Neg Pred Value : 0.8816          
+             Prevalence : 0.2190          
+         Detection Rate : 0.1333          
+   Detection Prevalence : 0.2762          
+      Balanced Accuracy : 0.7129          
+                                          
+       'Positive' Class : A               
+                                          
+[1] "Youden-Score: 0.435011441647597"
+[1] "./2018-10-01_python_faersen/confusion_table_15h.csv"
+[1] "Zeitraum: 15 Alarm: "
+          Outcome +    Outcome -      Total
+Test +           18           25         43
+Test -            5           53         58
+Total            23           78        101
+
+Point estimates and 95 % CIs:
+---------------------------------------------------------
+Apparent prevalence                    0.43 (0.33, 0.53)
+True prevalence                        0.23 (0.15, 0.32)
+Sensitivity                            0.78 (0.56, 0.93)
+Specificity                            0.68 (0.56, 0.78)
+Positive predictive value              0.42 (0.27, 0.58)
+Negative predictive value              0.91 (0.81, 0.97)
+Positive likelihood ratio              2.44 (1.66, 3.60)
+Negative likelihood ratio              0.32 (0.15, 0.71)
+---------------------------------------------------------
+Confusion Matrix and Statistics
+
+   A  B
+A 18 25
+B  5 53
+                                          
+               Accuracy : 0.703           
+                 95% CI : (0.6039, 0.7898)
+    No Information Rate : 0.7723          
+    P-Value [Acc > NIR] : 0.9591130       
+                                          
+                  Kappa : 0.3537          
+ Mcnemar's Test P-Value : 0.0005226       
+                                          
+            Sensitivity : 0.7826          
+            Specificity : 0.6795          
+         Pos Pred Value : 0.4186          
+         Neg Pred Value : 0.9138          
+             Prevalence : 0.2277          
+         Detection Rate : 0.1782          
+   Detection Prevalence : 0.4257          
+      Balanced Accuracy : 0.7310          
+                                          
+       'Positive' Class : A               
+                                          
+[1] "Youden-Score: 0.505514339391151"
+[1] "./2018-10-01_python_faersen/confusion_table_15h_ha1.csv"
+[1] "Zeitraum: 15 Alarm: _ha1"
+          Outcome +    Outcome -      Total
+Test +           18           24         42
+Test -            5           54         59
+Total            23           78        101
+
+Point estimates and 95 % CIs:
+---------------------------------------------------------
+Apparent prevalence                    0.42 (0.32, 0.52)
+True prevalence                        0.23 (0.15, 0.32)
+Sensitivity                            0.78 (0.56, 0.93)
+Specificity                            0.69 (0.58, 0.79)
+Positive predictive value              0.43 (0.28, 0.59)
+Negative predictive value              0.92 (0.81, 0.97)
+Positive likelihood ratio              2.54 (1.71, 3.78)
+Negative likelihood ratio              0.31 (0.14, 0.69)
+---------------------------------------------------------
+Confusion Matrix and Statistics
+
+   A  B
+A 18 24
+B  5 54
+                                          
+               Accuracy : 0.7129          
+                 95% CI : (0.6143, 0.7985)
+    No Information Rate : 0.7723          
+    P-Value [Acc > NIR] : 0.9353941       
+                                          
+                  Kappa : 0.3678          
+ Mcnemar's Test P-Value : 0.0008302       
+                                          
+            Sensitivity : 0.7826          
+            Specificity : 0.6923          
+         Pos Pred Value : 0.4286          
+         Neg Pred Value : 0.9153          
+             Prevalence : 0.2277          
+         Detection Rate : 0.1782          
+   Detection Prevalence : 0.4158          
+      Balanced Accuracy : 0.7375          
+                                          
+       'Positive' Class : A               
+                                          
+[1] "Youden-Score: 0.509482593359405"
+[1] "./2018-10-01_python_faersen/confusion_table_15h_ha2.csv"
+[1] "Zeitraum: 15 Alarm: _ha2"
+          Outcome +    Outcome -      Total
+Test +           14           13         27
+Test -            9           65         74
+Total            23           78        101
+
+Point estimates and 95 % CIs:
+---------------------------------------------------------
+Apparent prevalence                    0.27 (0.18, 0.36)
+True prevalence                        0.23 (0.15, 0.32)
+Sensitivity                            0.61 (0.39, 0.80)
+Specificity                            0.83 (0.73, 0.91)
+Positive predictive value              0.52 (0.32, 0.71)
+Negative predictive value              0.88 (0.78, 0.94)
+Positive likelihood ratio              3.65 (2.02, 6.62)
+Negative likelihood ratio              0.47 (0.28, 0.79)
+---------------------------------------------------------
+Confusion Matrix and Statistics
+
+   A  B
+A 14 13
+B  9 65
+                                         
+               Accuracy : 0.7822         
+                 95% CI : (0.689, 0.8582)
+    No Information Rate : 0.7723         
+    P-Value [Acc > NIR] : 0.4613         
+                                         
+                  Kappa : 0.4165         
+ Mcnemar's Test P-Value : 0.5224         
+                                         
+            Sensitivity : 0.6087         
+            Specificity : 0.8333         
+         Pos Pred Value : 0.5185         
+         Neg Pred Value : 0.8784         
+             Prevalence : 0.2277         
+         Detection Rate : 0.1386         
+   Detection Prevalence : 0.2673         
+      Balanced Accuracy : 0.7210         
+                                         
+       'Positive' Class : A              
+                                         
+[1] "Youden-Score: 0.429903765048693"
+[1] "./2018-10-01_python_faersen/confusion_table_16h.csv"
+[1] "Zeitraum: 16 Alarm: "
+          Outcome +    Outcome -      Total
+Test +           18           22         40
+Test -            5           47         52
+Total            23           69         92
+
+Point estimates and 95 % CIs:
+---------------------------------------------------------
+Apparent prevalence                    0.43 (0.33, 0.54)
+True prevalence                        0.25 (0.17, 0.35)
+Sensitivity                            0.78 (0.56, 0.93)
+Specificity                            0.68 (0.56, 0.79)
+Positive predictive value              0.45 (0.29, 0.62)
+Negative predictive value              0.90 (0.79, 0.97)
+Positive likelihood ratio              2.45 (1.63, 3.69)
+Negative likelihood ratio              0.32 (0.14, 0.70)
+---------------------------------------------------------
+Confusion Matrix and Statistics
+
+   A  B
+A 18 22
+B  5 47
+                                          
+               Accuracy : 0.7065          
+                 95% CI : (0.6024, 0.7969)
+    No Information Rate : 0.75            
+    P-Value [Acc > NIR] : 0.860142        
+                                          
+                  Kappa : 0.3721          
+ Mcnemar's Test P-Value : 0.002076        
+                                          
+            Sensitivity : 0.7826          
+            Specificity : 0.6812          
+         Pos Pred Value : 0.4500          
+         Neg Pred Value : 0.9038          
+             Prevalence : 0.2500          
+         Detection Rate : 0.1957          
+   Detection Prevalence : 0.4348          
+      Balanced Accuracy : 0.7319          
+                                          
+       'Positive' Class : A               
+                                          
+[1] "Youden-Score: 0.50045439162287"
+[1] "./2018-10-01_python_faersen/confusion_table_16h_ha1.csv"
+[1] "Zeitraum: 16 Alarm: _ha1"
+          Outcome +    Outcome -      Total
+Test +           18           22         40
+Test -            5           47         52
+Total            23           69         92
+
+Point estimates and 95 % CIs:
+---------------------------------------------------------
+Apparent prevalence                    0.43 (0.33, 0.54)
+True prevalence                        0.25 (0.17, 0.35)
+Sensitivity                            0.78 (0.56, 0.93)
+Specificity                            0.68 (0.56, 0.79)
+Positive predictive value              0.45 (0.29, 0.62)
+Negative predictive value              0.90 (0.79, 0.97)
+Positive likelihood ratio              2.45 (1.63, 3.69)
+Negative likelihood ratio              0.32 (0.14, 0.70)
+---------------------------------------------------------
+Confusion Matrix and Statistics
+
+   A  B
+A 18 22
+B  5 47
+                                          
+               Accuracy : 0.7065          
+                 95% CI : (0.6024, 0.7969)
+    No Information Rate : 0.75            
+    P-Value [Acc > NIR] : 0.860142        
+                                          
+                  Kappa : 0.3721          
+ Mcnemar's Test P-Value : 0.002076        
+                                          
+            Sensitivity : 0.7826          
+            Specificity : 0.6812          
+         Pos Pred Value : 0.4500          
+         Neg Pred Value : 0.9038          
+             Prevalence : 0.2500          
+         Detection Rate : 0.1957          
+   Detection Prevalence : 0.4348          
+      Balanced Accuracy : 0.7319          
+                                          
+       'Positive' Class : A               
+                                          
+[1] "Youden-Score: 0.50045439162287"
+[1] "./2018-10-01_python_faersen/confusion_table_16h_ha2.csv"
+[1] "Zeitraum: 16 Alarm: _ha2"
+          Outcome +    Outcome -      Total
+Test +           14           13         27
+Test -            9           56         65
+Total            23           69         92
+
+Point estimates and 95 % CIs:
+---------------------------------------------------------
+Apparent prevalence                    0.29 (0.20, 0.40)
+True prevalence                        0.25 (0.17, 0.35)
+Sensitivity                            0.61 (0.39, 0.80)
+Specificity                            0.81 (0.70, 0.90)
+Positive predictive value              0.52 (0.32, 0.71)
+Negative predictive value              0.86 (0.75, 0.93)
+Positive likelihood ratio              3.23 (1.79, 5.82)
+Negative likelihood ratio              0.48 (0.29, 0.81)
+---------------------------------------------------------
+Confusion Matrix and Statistics
+
+   A  B
+A 14 13
+B  9 56
+                                          
+               Accuracy : 0.7609          
+                 95% CI : (0.6606, 0.8437)
+    No Information Rate : 0.75            
+    P-Value [Acc > NIR] : 0.4600          
+                                          
+                  Kappa : 0.3973          
+ Mcnemar's Test P-Value : 0.5224          
+                                          
+            Sensitivity : 0.6087          
+            Specificity : 0.8116          
+         Pos Pred Value : 0.5185          
+         Neg Pred Value : 0.8615          
+             Prevalence : 0.2500          
+         Detection Rate : 0.1522          
+   Detection Prevalence : 0.2935          
+      Balanced Accuracy : 0.7101          
+                                          
+       'Positive' Class : A               
+                                          
+[1] "Youden-Score: 0.400654214444975"
+[1] "./2018-10-01_python_faersen/confusion_table_24h.csv"
+[1] "Zeitraum: 24 Alarm: "
+          Outcome +    Outcome -      Total
+Test +           18           17         35
+Test -            5           27         32
+Total            23           44         67
+
+Point estimates and 95 % CIs:
+---------------------------------------------------------
+Apparent prevalence                    0.52 (0.40, 0.65)
+True prevalence                        0.34 (0.23, 0.47)
+Sensitivity                            0.78 (0.56, 0.93)
+Specificity                            0.61 (0.45, 0.76)
+Positive predictive value              0.51 (0.34, 0.69)
+Negative predictive value              0.84 (0.67, 0.95)
+Positive likelihood ratio              2.03 (1.32, 3.11)
+Negative likelihood ratio              0.35 (0.16, 0.80)
+---------------------------------------------------------
+Confusion Matrix and Statistics
+
+   A  B
+A 18 17
+B  5 27
+                                         
+               Accuracy : 0.6716         
+                 95% CI : (0.546, 0.7815)
+    No Information Rate : 0.6567         
+    P-Value [Acc > NIR] : 0.45416        
+                                         
+                  Kappa : 0.3524         
+ Mcnemar's Test P-Value : 0.01902        
+                                         
+            Sensitivity : 0.7826         
+            Specificity : 0.6136         
+         Pos Pred Value : 0.5143         
+         Neg Pred Value : 0.8438         
+             Prevalence : 0.3433         
+         Detection Rate : 0.2687         
+   Detection Prevalence : 0.5224         
+      Balanced Accuracy : 0.6981         
+                                         
+       'Positive' Class : A              
+                                         
+[1] "Youden-Score: 0.379645732689211"
+[1] "./2018-10-01_python_faersen/confusion_table_24h_ha1.csv"
+[1] "Zeitraum: 24 Alarm: _ha1"
+          Outcome +    Outcome -      Total
+Test +           18           17         35
+Test -            5           27         32
+Total            23           44         67
+
+Point estimates and 95 % CIs:
+---------------------------------------------------------
+Apparent prevalence                    0.52 (0.40, 0.65)
+True prevalence                        0.34 (0.23, 0.47)
+Sensitivity                            0.78 (0.56, 0.93)
+Specificity                            0.61 (0.45, 0.76)
+Positive predictive value              0.51 (0.34, 0.69)
+Negative predictive value              0.84 (0.67, 0.95)
+Positive likelihood ratio              2.03 (1.32, 3.11)
+Negative likelihood ratio              0.35 (0.16, 0.80)
+---------------------------------------------------------
+Confusion Matrix and Statistics
+
+   A  B
+A 18 17
+B  5 27
+                                         
+               Accuracy : 0.6716         
+                 95% CI : (0.546, 0.7815)
+    No Information Rate : 0.6567         
+    P-Value [Acc > NIR] : 0.45416        
+                                         
+                  Kappa : 0.3524         
+ Mcnemar's Test P-Value : 0.01902        
+                                         
+            Sensitivity : 0.7826         
+            Specificity : 0.6136         
+         Pos Pred Value : 0.5143         
+         Neg Pred Value : 0.8438         
+             Prevalence : 0.3433         
+         Detection Rate : 0.2687         
+   Detection Prevalence : 0.5224         
+      Balanced Accuracy : 0.6981         
+                                         
+       'Positive' Class : A              
+                                         
+[1] "Youden-Score: 0.379645732689211"
+[1] "./2018-10-01_python_faersen/confusion_table_24h_ha2.csv"
+[1] "Zeitraum: 24 Alarm: _ha2"
+          Outcome +    Outcome -      Total
+Test +           14           11         25
+Test -            9           33         42
+Total            23           44         67
+
+Point estimates and 95 % CIs:
+---------------------------------------------------------
+Apparent prevalence                    0.37 (0.26, 0.50)
+True prevalence                        0.34 (0.23, 0.47)
+Sensitivity                            0.61 (0.39, 0.80)
+Specificity                            0.75 (0.60, 0.87)
+Positive predictive value              0.56 (0.35, 0.76)
+Negative predictive value              0.79 (0.63, 0.90)
+Positive likelihood ratio              2.43 (1.33, 4.47)
+Negative likelihood ratio              0.52 (0.30, 0.89)
+---------------------------------------------------------
+Confusion Matrix and Statistics
+
+   A  B
+A 14 11
+B  9 33
+                                          
+               Accuracy : 0.7015          
+                 95% CI : (0.5773, 0.8072)
+    No Information Rate : 0.6567          
+    P-Value [Acc > NIR] : 0.2628          
+                                          
+                  Kappa : 0.3514          
+ Mcnemar's Test P-Value : 0.8231          
+                                          
+            Sensitivity : 0.6087          
+            Specificity : 0.7500          
+         Pos Pred Value : 0.5600          
+         Neg Pred Value : 0.7857          
+             Prevalence : 0.3433          
+         Detection Rate : 0.2090          
+   Detection Prevalence : 0.3731          
+      Balanced Accuracy : 0.6793          
+                                          
+       'Positive' Class : A               
+                                          
+[1] "Youden-Score: 0.35610305958132"
