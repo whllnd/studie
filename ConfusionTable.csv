@@ -1,0 +1,9 @@
+Classification;1h;2h;4h;12h;24h
+True positives HA1;23.0;51.0;78.0;82.0;88.0
+True positives HA2;22.0;46.0;56.0;59.0;62.0
+False positives HA1;222.0;193.0;152.0;106.0;69.0
+False positives HA2;109.0;85.0;75.0;55.0;33.0
+True negatives HA1;5338.0;2558.0;1190.0;305.0;116.0
+True negatives HA2;5451.0;2666.0;1267.0;356.0;152.0
+False negatives HA1;95.0;67.0;40.0;36.0;30.0
+False negatives HA2;96.0;72.0;62.0;59.0;56.0
